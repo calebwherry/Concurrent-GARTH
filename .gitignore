@@ -11,3 +11,13 @@
 *.lai
 *.la
 *.a
+
+# Log files
+*.log
+
+# Build directories
+bin/
+
+# Mac files
+.DS_STORE
+.dSYM

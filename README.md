@@ -1,8 +1,12 @@
-Concurrent-GARTH
-================
+[![License](https://poser.pugx.org/leaphly/cart-bundle/license.png)](https://packagist.org/packages/leaphly/cart-bundle)
 
-Concurrent GARTH (Genetic AlgoRiTHms) in C++: A Framework for Concurrent GAs
+# Concurrent-GARTH
+
+Concurrent GARTH (Genetic AlgoRiTHms) in C++: A Framework for Concurrent GAs.
+
+## Copyright
 
 Copyright 2013 Korovasoft, Inc.
 
-Available under the terms of the MIT Public License. See LICENSE file for details.
+## License
+This project is released under the [MIT License](http://opensource.org/licenses/MIT). See the LICENSE file for more information.

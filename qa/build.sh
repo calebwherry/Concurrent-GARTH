@@ -27,12 +27,13 @@ usage()
 	printf "./build.sh\n"
 	printf "\t-h, --help \t Usage details.\n"
 	printf "\t-c, --clean \t Clean build files.\n"
+	printf "\t-s, --show-log \t Show build log.\n"
 	printf "\n"
 }
 
 
 #
-# Filter through CLI args:
+# Cmd line args:
 #
 while [ "$1" != "" ]; do
 	PARAM=`echo $1 | awk -F= '{print $1}'`
@@ -46,6 +47,9 @@ while [ "$1" != "" ]; do
     	rm -rf build_* install_*
 			exit 0
       ;;
+		-s | --show-log)
+			SHOW_LOG=TRUE
+			;;
 		*)
 			echo "ERROR: Unknown parameter - \"$PARAM\"."
 			usage
@@ -182,17 +186,24 @@ fi
 
 
 #
-# Build completed:
+# Show log if flag set:
 #
-echo
-echo "Build completed successfully!"
+if [ ! -z "${SHOW_LOG}" ]
+then
+	echo
+	echo "Log file contents:"
+	cat "${LOGFILE}"
+	echo
+fi
 
 
 #
-# Do some cleanup:
+# Cleanup build:
 #
+echo -n "Cleaning up build files..."
 cd ..
 rm -rf "${BUILD_DIR}" "${INSTALL_DIR}" ${LOGFILE}
+echo " done."
 
 
 #
@@ -205,7 +216,7 @@ STOP_TIME=$(date +%s)
 # Elapsed time:
 #
 echo
-echo "Build Execution Time: $(expr ${STOP_TIME} - ${START_TIME}) seconds."
+echo "Build completed successfully in $(expr ${STOP_TIME} - ${START_TIME}) seconds!"
 echo
 
 

@@ -4,6 +4,10 @@
 
 Concurrent GARTH (Genetic AlgoRiTHms) in C++: A Framework for Concurrent GAs.
 
+## Dependencies
+
+C++ compiler that implements the complete C++11 standard.
+
 ## Copyright
 
 Copyright (C) 2014 Korovasoft, Inc.

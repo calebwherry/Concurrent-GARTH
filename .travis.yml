@@ -10,8 +10,8 @@ before_install:
   - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
 before_script:
   - cd /usr/src/gtest; sudo cmake CMakeLists.txt; sudo make; sudo cp *.a /usr/lib; cd -
-  - mkdir build; cd build
-script: cmake .. && make && sudo make install
+  - cd qa
+script: ./build.sh
 notifications:
   recipients:
     - calebwherry@gmail.com

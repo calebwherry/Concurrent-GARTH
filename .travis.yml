@@ -7,7 +7,7 @@ before_install:
   - sudo apt-get install doxygen cmake libgtest-dev
 before_script:
   - cd /usr/src/gtest; sudo cmake CMakeLists.txt; sudo make; sudo cp *.a /usr/lib; cd -
-	- mkdir build; cd build
+  - mkdir build; cd build
 script: cmake .. && make && make install
 notifications:
   recipients:

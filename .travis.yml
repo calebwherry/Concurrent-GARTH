@@ -11,7 +11,7 @@ before_install:
 before_script:
   - cd /usr/src/gtest; sudo cmake CMakeLists.txt; sudo make; sudo cp *.a /usr/lib; cd -
   - mkdir build; cd build
-script: cmake .. && make && make install
+script: cmake .. && make && sudo make install
 notifications:
   recipients:
     - calebwherry@gmail.com

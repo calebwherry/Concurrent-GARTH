@@ -1,0 +1,18 @@
+language: cpp
+compiler:
+  - gcc
+  - clang
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install doxygen cmake libgtest-dev
+before_script:
+  - cd /usr/src/gtest; sudo cmake CMakeLists.txt; sudo make; sudo cp *.a /usr/lib; cd -
+	- mkdir build; cd build
+script: cmake .. && make && make install
+notifications:
+  recipients:
+    - calebwherry@gmail.com
+    - robertofrances@gmail.com
+  email:
+    on_success: change
+    on_failure: always

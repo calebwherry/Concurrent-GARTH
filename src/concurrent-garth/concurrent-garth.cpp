@@ -1,20 +1,29 @@
 ////////////////////////////////////////
 ////////////////////////////////////////
 //
+//  Copyright (C) 2014 Korovasoft, Inc.
 //
+//  File:
+//      \file concurrent-garth.cpp
 //
+//  Description:
+//      \brief Concurrent-GARTH application
 //
+//  Author:
+//      \author J. Caleb Wherry
 //
 ////////////////////////////////////////
 ////////////////////////////////////////
+
+
+/// Local includes:
+////
 
 /// Compiler Includes:
-#include<thread>
-#include<vector>
-#include<iostream>
-
-/// Local Includes:
-////
+//#include <GarthEngine.h>
+#include <thread>
+#include <vector>
+#include <iostream>
 
 /// Namespaces:
 using namespace std;

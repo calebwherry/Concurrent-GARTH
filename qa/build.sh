@@ -27,6 +27,7 @@ usage()
 	printf "./build.sh\n"
 	printf "\t-h, --help \t Usage details.\n"
 	printf "\t-c, --clean \t Clean build files.\n"
+	printf "\t-k, --keep-build-files \t Keep all build files.\n"
 	printf "\t-l, --show-log \t Show build log.\n"
 	printf "\n"
 }
@@ -47,6 +48,9 @@ while [ "$1" != "" ]; do
     	rm -rf build_* install_*
 			exit 0
       ;;
+		-k | --keep-build-files)
+			KEEP_BUILD_FILES=TRUE
+			;;
 		-l | --show-log)
 			SHOW_LOG=TRUE
 			;;
@@ -130,7 +134,7 @@ cd "${BUILD_DIR}"
 #
 echo -n "Running 'cmake'... "
 (
-cmake ../../ -DCMAKE_INSTALL_PREFIX="${INSTALL_DIR}"
+cmake ../../ -DCMAKE_INSTALL_PREFIX="../${INSTALL_DIR}"
 ) >> ${LOGFILE} 2>&1
 STATUS=$?
 
@@ -198,12 +202,15 @@ fi
 
 
 #
-# Cleanup build:
+# Cleanup build if keep-files flag not set:
 #
-echo -n "Cleaning up build files..."
-cd ..
-rm -rf "${BUILD_DIR}" "${INSTALL_DIR}" ${LOGFILE}
-echo " done."
+if [ -z "${KEEP_BUILD_FILES}" ]
+then
+	echo -n "Cleaning up build files..."
+	cd ..
+	rm -rf "${BUILD_DIR}" "${INSTALL_DIR}" ${LOGFILE}
+	echo " done."
+fi
 
 
 #

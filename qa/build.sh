@@ -27,7 +27,7 @@ usage()
 	printf "./build.sh\n"
 	printf "\t-h, --help \t Usage details.\n"
 	printf "\t-c, --clean \t Clean build files.\n"
-	printf "\t-s, --show-log \t Show build log.\n"
+	printf "\t-l, --show-log \t Show build log.\n"
 	printf "\n"
 }
 
@@ -47,7 +47,7 @@ while [ "$1" != "" ]; do
     	rm -rf build_* install_*
 			exit 0
       ;;
-		-s | --show-log)
+		-l | --show-log)
 			SHOW_LOG=TRUE
 			;;
 		*)

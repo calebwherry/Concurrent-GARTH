@@ -11,6 +11,7 @@ before_install:
 before_script:
   - cd /usr/src/gtest; sudo cmake CMakeLists.txt; sudo make; sudo cp *.a /usr/lib; cd -
   - cd qa
+  - g++ --version
 script: ./build.sh
 notifications:
   recipients:

@@ -72,6 +72,12 @@ START_TIME=$(date +%s)
 
 
 #
+# Build root:
+#
+BUILD_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+
+#
 # Get time stamp:
 #
 TIMESTAMP="`date +\"%Y-%m-%d_%T\"`"
@@ -80,19 +86,19 @@ TIMESTAMP="`date +\"%Y-%m-%d_%T\"`"
 #
 # Build directory name:
 #
-BUILD_DIR="build_${TIMESTAMP}"
+BUILD_DIR="${BUILD_ROOT}/build_${TIMESTAMP}"
 
 
 #
 # Install directory name:
 #
-INSTALL_DIR="install_${TIMESTAMP}"
+INSTALL_DIR="${BUILD_ROOT}/install_${TIMESTAMP}"
 
 
 #
 # Logfile name:
 #
-LOGFILE="build_${TIMESTAMP}.log"
+LOGFILE="${BUILD_ROOT}/build_${TIMESTAMP}.log"
 
 
 #
@@ -134,7 +140,7 @@ cd "${BUILD_DIR}"
 #
 echo -n "Running 'cmake'... "
 (
-cmake ../../ -DCMAKE_INSTALL_PREFIX="../${INSTALL_DIR}"
+cmake ../../ -DCMAKE_INSTALL_PREFIX="${INSTALL_DIR}"
 ) >> ${LOGFILE} 2>&1
 STATUS=$?
 

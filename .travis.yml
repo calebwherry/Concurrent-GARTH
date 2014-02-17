@@ -1,16 +1,35 @@
-language: cpp
+########################################
+########################################
+##
+##  Copyright (C) 2014 Korovasoft, Inc.
+##
+##  File:
+##      \file .travis.yml
+##
+##  Description:
+##      \brief Travis-CI configuration file
+##
+##  Author:
+##      \author J. Caleb Wherry
+##
+########################################
+########################################
+
+language: 
+  - cpp
 compiler:
   - gcc
 #  - clang
 before_install:
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   - sudo apt-get update
+install:
   - sudo apt-get install doxygen libgtest-dev
-  - if [ "$CXX" = "g++" ]; then sudo apt-get install g++-4.8; export CXX="g++-4.8" CC="gcc-4.8"; fi
+  - sh -c "if [ '$CXX' = 'g++' ]; then sudo apt-get install g++-4.8; export CXX='g++-4.8' CC='gcc-4.8'; fi"
 before_script:
   - cd /usr/src/gtest; sudo cmake CMakeLists.txt; sudo make; sudo cp *.a /usr/lib; cd -
-  - cd qa
-script: ./build.sh
+script:
+  - "./qa/build.sh"
 notifications:
   recipients:
     - calebwherry@gmail.com

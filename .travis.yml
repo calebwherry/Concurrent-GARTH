@@ -27,15 +27,13 @@ before_install:
   - sudo apt-get update
 
 install:
-  - sudo apt-get --no-install-recommends install doxygen libgtest-dev
-  - 'echo "Before install: ${CXX}"'
+  - sudo apt-get install cmake libgtest-dev
+  - sudo apt-get --no-install-recommends install doxygen
   - if [ "${CXX}" = "g++" ]; then sudo apt-get install g++-4.8; fi
-  - 'echo "After install: ${CXX}"'
 
 before_script:
-  - cd /usr/src/gtest; sudo cmake CMakeLists.txt; sudo make; sudo cp *.a /usr/lib; cd -
   - if [ "${CXX}" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
-  - 'echo "Before script: ${CXX}"'
+  - cd /usr/src/gtest; sudo cmake CMakeLists.txt; sudo make; sudo cp *.a /usr/lib; cd -
 
 script:
   - "./qa/build.sh"

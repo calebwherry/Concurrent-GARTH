@@ -31,7 +31,7 @@ install:
   - sudo apt-get --no-install-recommends install doxygen
   - if [ "${CXX}" = "g++" ]; then sudo apt-get install g++-4.8; fi
 
-	# Newest cmake version:
+  # Newest cmake version:
   - wget http://www.cmake.org/files/v2.8/cmake-2.8.12.2.tar.gz
   - tar -xzvf cmake-2.8.11.tar.gz
   - cd cmake-2.8.11

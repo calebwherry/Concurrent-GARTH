@@ -23,14 +23,23 @@ compiler:
 #  - clang
 
 before_install:
-  - "cmake --version"
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   - sudo apt-get update
 
 install:
-  - sudo apt-get install cmake libgtest-dev
+  - sudo apt-get install libgtest-dev
   - sudo apt-get --no-install-recommends install doxygen
   - if [ "${CXX}" = "g++" ]; then sudo apt-get install g++-4.8; fi
+
+	# Newest cmake version:
+  - wget http://www.cmake.org/files/v2.8/cmake-2.8.12.2.tar.gz
+  - tar -xzvf cmake-2.8.11.tar.gz
+  - cd cmake-2.8.11
+  - ./bootstrap --prefix=/usr --system-libs --mandir=/share/man --docdir=/share/doc/cmake-2.8.11
+  - make
+  - make test
+  - sudo make install
+  - cd -
 
 before_script:
   - if [ "${CXX}" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi

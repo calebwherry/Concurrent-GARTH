@@ -18,6 +18,18 @@
 
 
 #
+# Start time:
+#
+START_TIME=$(date +%s)
+
+
+#
+# Build root:
+#
+BUILD_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+
+#
 # Usage function:
 #
 usage()
@@ -45,7 +57,7 @@ while [ "$1" != "" ]; do
       exit 0
       ;;
 		-c | --clean)
-    	rm -rf build_* install_*
+    	rm -rf "${BUILD_ROOT}"/build_* "${BUILD_ROOT}"/install_*
 			exit 0
       ;;
 		-k | --keep-build-files)
@@ -63,18 +75,6 @@ while [ "$1" != "" ]; do
 
 	shift
 done
-
-
-#
-# Start time:
-#
-START_TIME=$(date +%s)
-
-
-#
-# Build root:
-#
-BUILD_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 
 #

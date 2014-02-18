@@ -25,20 +25,20 @@ project(Concurrent-GARTH)
 #
 # Check compiler versions:
 #
-## TODO: No worky?
-#if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-#	# require at least gcc 4.5
-#	if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.5)
-#		message(FATAL_ERROR "GCC version must be at least 4.5!")
-#	endif()
-#elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-#	# require at least clang 3.2
-#	if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 3.2)
-#		message(FATAL_ERROR "Clang version must be at least 3.2!")
-#	endif()
-#else()
-#	message(WARNING "You are using an unsupported compiler! Compilation has only been tested with GCC and Clang.")
-#endif()
+## TODO: No worky with Travis-CI environment... why?
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+	# require at least gcc 4.8
+	if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
+		message(FATAL_ERROR "GCC version must be at least 4.8!")
+	endif()
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+	# require at least clang 3.2
+	if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 3.2)
+		message(FATAL_ERROR "Clang version must be at least 3.2!")
+	endif()
+else()
+	message(WARNING "You are using an unsupported compiler! Compilation has only been tested with GCC and Clang.")
+endif()
 
 
 #

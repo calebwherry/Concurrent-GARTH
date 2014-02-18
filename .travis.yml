@@ -37,7 +37,7 @@ install:
   # Install GoogleTest testing framework:
   - sudo apt-get install libgtest-dev
 
-	# Install doxygen without all those lame depends like latex:
+  # Install doxygen without all those lame depends like latex:
   - sudo apt-get --no-install-recommends install doxygen
 
 before_script:

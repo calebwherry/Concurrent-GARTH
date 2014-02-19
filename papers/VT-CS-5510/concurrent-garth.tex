@@ -1,0 +1,155 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%%  Author:
+%%    J. Caleb Wherry
+%%
+%%  Description:
+%%    Concurrent-GARTH: Project paper
+%%
+%%  Created:
+%%    02/14/2014
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%
+% THIS IS SIGPROC-SP.TEX - VERSION 3.1
+% WORKS WITH V3.2SP OF ACM_PROC_ARTICLE-SP.CLS
+% APRIL 2009
+%
+
+
+%
+% Preamble:
+%
+\documentclass{acm_proc_article-sp}
+
+
+%
+% Document begin:
+%
+\begin{document}
+
+\title{
+Concurrent GARTH (Genetic AlgoRiTHms) in C++11: A Framework for Lock-free GAs
+}
+
+\numberofauthors{1}
+
+\author{
+% 1st. author
+\alignauthor
+J. Caleb Wherry \\
+	\affaddr{Virginia Tech} \\
+	\affaddr{Department of ESM} \\
+	\affaddr{Blacksburg, Virginia} \\
+  \email{cwherry@vt.edu}
+}
+
+\maketitle
+
+
+%
+% Abstract:
+%
+\begin{abstract}
+Genetic algorithms (GAs) are a fasinating area of optimization theory that draw from ideas set forth by Charles Darwin in \emph{The Orgin of Species}. GAs have been shown to improve optimizations that we as humans cannot obtain on our own because of our inherint linear thinking. Non-linear optimization problems benefit most from GAs since GAs are able to search the non-linear space much farther and find optimal solutions much quicker than traditional optimization methods.
+
+In this project we would like to take the typical framework that GAs are built on and make it concurrent and lock-free using the new C++11 standard. This will involve multiple stages in the development cycle that deal with designing the concurrent object for the GA threads to work on, implementing the GA framework using the new concurrent object, and then benchmarking the concurrent framework on some real-world applications.
+
+We have done previous work in sequential GAs and have developed a framework in Java that runs on a uniprocessor. We will draw from this knowledge when developing our new Lock-free GA framework. After the concurrent framework has been developed, we will benchmark the framework based on the number of threads that work on the GA. We will then be able to analyze the tradeoffs in using more threads and how much speedup we obtain using the concurrent object.
+
+As of right now, the real-world application will be a physics problem that is non-trivial in quantum condensed matter physics: the optimal placement of charges on sphere with the lowest energy state. GAs have been shown to optimize this problem more efficiently than tarditional methods when the number of particles exceeds 100.
+
+The main goal of this project is to apply a concurrency model to GAs for real-world problems. The difficulty here will be in integrating the Lock-free object into the framework such that we see a gain in speed when using more threads, not a speed lose that is occured in using the lock-free object.
+\end{abstract}
+
+% A category with the (minimum) three required fields
+\category{H.4}{Information Systems Applications}{Miscellaneous}
+% A category including the fourth, optional field follows...
+\category{D.2.8}{Software Engineering}{Metrics}[complexity measures, performance measures]
+
+\terms{Theory}
+
+
+%
+% Schedule:
+%
+\section{Schedule}
+\begin{enumerate}
+
+\item{
+February:
+}
+\begin{enumerate}
+\item Architect and design GA framework (Note: almost done).
+\item Research lock-free objects that will best fit the GA process (Lock-free queue or Lock-free B-tree).
+\item Implement lock-free object that is decided upon from above research.
+\end{enumerate}
+
+\item{
+March:
+}
+\begin{enumerate}
+\item Finish last details for lock-free object.
+\item Implement GA framework to work with new concurrent object.
+\item Formulate quantum CMP application requirements.
+\item Submit mid-semester report.
+\end{enumerate}
+
+
+\item{
+April:
+}
+\begin{enumerate}
+\item Complete GA framework.
+\item Apply framework to quantum application.
+\item Run benchmarks based on varying numbers of threads.
+\item Write final proposal and create presentation.
+\end{enumerate}
+
+
+\item{
+May:
+}
+\begin{enumerate}
+\item Submit final report and give presentation!
+\end{enumerate}
+
+
+\end{enumerate}
+
+
+%
+% Introduction:
+%
+\section{Introduction}
+
+\section{The {\secit Body} of The Paper}
+
+\subsection{Sub section 1}
+
+\subsection{Section 2}
+
+\section{Conclusions}
+
+
+%
+% Bibliography:
+%
+\bibliographystyle{abbrv}
+\bibliography{concurrent-garth}
+
+
+%
+% Not sure what this is or does:
+%
+\balancecolumns
+
+
+%
+% Document end:
+%
+\end{document}

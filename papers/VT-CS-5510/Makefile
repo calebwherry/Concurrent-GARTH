@@ -91,15 +91,11 @@ figures:
 	@printf "\tdone.\n"
 
 # Compile latex:
-#		Note: We have to run latex a bunch of times to get all the bibtex data filled in correctly.
 latex:
 	@for f in ""${LATEX}""; do \
 	printf "[Compiling] $$f: \n"; \
-	printf "\tpdflatex --shell-escape $$f 2>&1 > /dev/null\n"; \
-	pdflatex --shell-escape $$f 2>&1 > /dev/null; \
-	bibtex $${f%%.*} 2>&1 > /dev/null; \
-	pdflatex --shell-escape $$f 2>&1 > /dev/null; \
-	pdflatex --shell-escape $$f 2>&1 > /dev/null; \
+	printf "\ttexi2pdf --shell-escape $$f 2>&1 > /dev/null\n"; \
+	texi2pdf --shell-escape $$f 2>&1 > /dev/null; \
 	done
 
 # Distribution target:

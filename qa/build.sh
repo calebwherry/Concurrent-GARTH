@@ -196,6 +196,26 @@ fi
 
 
 #
+# Run make doc:
+#
+echo -n "Running 'make doc'... "
+(
+make doc
+) >> ${LOGFILE} 2>&1
+STATUS=$?
+
+if [ ${STATUS} -ne 0 ]
+then
+	echo "** ERROR: 'make doc' encountered a problem, please check ${LOGFILE}! **"
+	echo
+	cat "${LOGFILE}"
+	exit 1
+else
+	echo "done."
+fi
+
+
+#
 # Run make install:
 #
 echo -n "Running 'make install'... "

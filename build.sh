@@ -26,7 +26,8 @@ START_TIME=$(date +%s)
 #
 # Build root:
 #
-BUILD_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+BUILD_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/build"
+mkdir -p "${BUILD_ROOT}"
 
 
 #
@@ -57,7 +58,7 @@ while [ "$1" != "" ]; do
       exit 0
       ;;
 		-c | --clean)
-    	rm -rf "${BUILD_ROOT}"/build_* "${BUILD_ROOT}"/install_*
+    	rm -rf "${BUILD_ROOT}"
 			exit 0
       ;;
 		-k | --keep-build-files)
@@ -113,8 +114,8 @@ STATUS=0
 echo
 echo -n "Creating build/install directories... "
 (
-mkdir -p "${BUILD_DIR}"
-mkdir -p "${INSTALL_DIR}"
+mkdir "${BUILD_DIR}"
+mkdir "${INSTALL_DIR}"
 ) >> ${LOGFILE} 2>&1
 STATUS=$?
 
@@ -254,7 +255,7 @@ if [ -z "${KEEP_BUILD_FILES}" ]
 then
 	echo -n "Cleaning up build files..."
 	cd ..
-	rm -rf "${BUILD_DIR}" "${INSTALL_DIR}" ${LOGFILE}
+	rm -rf "${BUILD_ROOT}"
 	echo " done."
 fi
 

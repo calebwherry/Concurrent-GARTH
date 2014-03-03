@@ -7,7 +7,7 @@
 ##      \file CMakeLists.txt
 ##
 ##  Description:
-##      \brief Source-level CMakeLists.txt
+##      \brief Test-level CMakeLists.txt
 ##
 ##  Author:
 ##      \author J. Caleb Wherry
@@ -19,6 +19,6 @@
 #
 # Add subdirectories:
 #
-add_subdirectory(lib)
-add_subdirectory(app)
-add_subdirectory(test)
+add_subdirectory(functional)
+add_subdirectory(system)
+add_subdirectory(unit)

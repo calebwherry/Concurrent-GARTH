@@ -46,10 +46,10 @@ project(Concurrent-GARTH)
 # Set global project path variables:
 #
 set(PROJECT_ROOT_DIR "${PROJECT_SOURCE_DIR}")
-set(PROJECT_LIB_DIR "${PROJECT_ROOT_DIR}/lib")
 set(PROJECT_SRC_DIR "${PROJECT_ROOT_DIR}/src")
-set(PROJECT_QA_DIR "${PROJECT_ROOT_DIR}/qa")
-set(PROJECT_TEST_DIR "${PROJECT_QA_DIR}/test")
+set(PROJECT_LIB_DIR "${PROJECT_SRC_DIR}/lib")
+set(PROJECT_APP_DIR "${PROJECT_SRC_DIR}/app")
+set(PROJECT_TEST_DIR "${PROJECT_SRC_DIR}/test")
 set(PROJECT_DOC_DIR "${PROJECT_ROOT_DIR}/doc")
 
 
@@ -62,8 +62,6 @@ include( CTest )
 #
 # Add subdirectories:
 #
-add_subdirectory(lib)
 add_subdirectory(src)
-add_subdirectory(qa)
 add_subdirectory(doc)
 add_subdirectory(papers)

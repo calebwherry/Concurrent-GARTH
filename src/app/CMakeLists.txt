@@ -7,7 +7,7 @@
 ##      \file CMakeLists.txt
 ##
 ##  Description:
-##      \brief QA-level CMakeLists.txt
+##      \brief Application-level CMakeLists.txt
 ##
 ##  Author:
 ##      \author J. Caleb Wherry
@@ -17,5 +17,12 @@
 
 
 #
-# TODO:  Make this do stuff...
+#  Set compiler flags for source files:
 #
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=c++11 -Wl,--no-as-needed")
+
+
+#
+# Add subdirectories:
+#
+add_subdirectory(concurrent-garth)

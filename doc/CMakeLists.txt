@@ -23,7 +23,7 @@ find_package(Doxygen)
 
 if (DOXYGEN_FOUND)
 
-	configure_file( ${PROJECT_DOC_DIR}/Doxyfile.in ${PROJECT_BINARY_DIR}/Doxyfile @ONLY)
+	configure_file( ${PROJECT_DOC_DIR}/Doxyfile.in ${PROJECT_BINARY_DIR}/Doxyfile @ONLY IMMEDIATE)
 	add_custom_target( doc
 		${DOXYGEN_EXECUTABLE} ${PROJECT_BINARY_DIR}/Doxyfile
 		WORKING_DIRECTORY ${PROJECT_BINARY_DIR}

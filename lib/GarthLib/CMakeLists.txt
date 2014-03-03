@@ -15,10 +15,15 @@
 ########################################
 ########################################
 
-cmake_minimum_required(VERSION 2.8)
-project(Concurrent-GARTH)
 
-add_library(garth STATIC Garth.cpp)
+#
+# Create a static library:
+#
+add_library(Garth STATIC Garth.cpp)
 
-install(TARGETS garth DESTINATION lib)
+
+#
+# Add library headers and archive files to install:
+#
+install(TARGETS Garth DESTINATION lib)
 install(FILES Garth.h DESTINATION include)

@@ -15,9 +15,9 @@
 ########################################
 ########################################
 
-cmake_minimum_required(VERSION 2.8)
-project(Concurrent-GARTH)
 
+#
 # Add subdirectories:
+#
 add_subdirectory(ConcurrentLib)
 add_subdirectory(GarthLib)

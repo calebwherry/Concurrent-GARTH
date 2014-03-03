@@ -15,17 +15,32 @@
 ########################################
 ########################################
 
-cmake_minimum_required(VERSION 2.8)
-project(Concurrent-GARTH)
 
-# Compiler flags:
+#
+# Set app compiler flags:
+#
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
+
+#
+# Add include directories for local libraries:
+#
+include_directories(${PROJECT_LIB_DIR}/GarthLib)
+
+
+#
 # Add executables:
+#
 add_executable(concurrent-garth concurrent-garth.cpp)
 
-# Link libraries:
-target_link_libraries(concurrent-garth garth)
 
+#
+# Link libraries:
+#
+target_link_libraries(concurrent-garth Garth)
+
+
+#
 # Specify install directory:
+#
 install(TARGETS concurrent-garth DESTINATION bin)

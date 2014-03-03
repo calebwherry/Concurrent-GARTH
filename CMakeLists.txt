@@ -15,12 +15,13 @@
 ########################################
 ########################################
 
+
 #
 # CMake version and project name:
 #
 cmake_minimum_required(VERSION 2.8)
 project(Concurrent-GARTH)
-include( CTest )
+
 
 #
 # Check compiler versions:
@@ -42,7 +43,26 @@ include( CTest )
 
 
 #
+# Set global project path variables:
+#
+set(PROJECT_LIB_DIR "${PROJECT_SOURCE_DIR}/lib")
+set(PROJECT_SRC_DIR "${PROJECT_SOURCE_DIR}/src")
+set(PROJECT_QA_DIR "${PROJECT_SOURCE_DIR}/qa")
+set(PROJECT_TEST_DIR "${PROJECT_SOURCE_DIR}/qa/test")
+set(PROJECT_DOC_DIR "${PROJECT_SOURCE_DIR}/doc")
+
+
+#
+# Testing:
+#
+include( CTest )
+
+
+#
 # Add subdirectories:
 #
 add_subdirectory(lib)
 add_subdirectory(src)
+add_subdirectory(qa)
+add_subdirectory(doc)
+add_subdirectory(papers)

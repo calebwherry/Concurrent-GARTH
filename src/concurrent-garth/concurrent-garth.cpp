@@ -20,13 +20,14 @@
 ////
 
 /// Compiler Includes:
-//#include <GarthEngine.h>
+#include <Garth.h>
 #include <thread>
 #include <vector>
 #include <iostream>
 
 /// Namespaces:
 using namespace std;
+using namespace Garth;
 
 /// Function specs:
 uint32_t getNumCores();
@@ -36,6 +37,10 @@ void helloWorld();
 /// Main:
 int main()
 {
+
+	//  Test GarthLib:
+	GarthEngine* engine = new GarthEngine();
+
 
 	// Get number of cores available:
 	// TOD0: This should probably have a -1 since main runs in its own thread...

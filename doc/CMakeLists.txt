@@ -15,6 +15,7 @@
 ########################################
 ########################################
 
+
 #
 # Compile doxygen documentation:
 #
@@ -31,6 +32,6 @@ if (DOXYGEN_FOUND)
 
 else ()
 
-	message(FATAL_ERROR "Doxygen comments could not be created; aborting!")
+	message(FATAL_ERROR "Doxygen comments could not be created because Doxygen was not found on this system; aborting!")
 
 endif ()

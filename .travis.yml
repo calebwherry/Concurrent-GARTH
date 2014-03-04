@@ -44,7 +44,7 @@ before_script:
   - cd /usr/src/gtest; sudo cmake CMakeLists.txt; sudo make; sudo cp *.a /usr/lib; cd -
 
   # Set python link
-	- sudo rm /usr/bin/python; sudo ln -s /usr/bin/python3.3 python
+  - sudo rm /usr/bin/python; sudo ln -s /usr/bin/python3.3 python
 
 script:
   - "./build.py"

@@ -22,8 +22,6 @@ compiler:
   - gcc
 #  - clang
 
-python:
-  - "3.3"
 before_install:
   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
   - sudo apt-get update
@@ -35,7 +33,7 @@ install:
   - if [ "${CXX}" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
 
   # Install GoogleTest testing framework:
-  - sudo apt-get install libgtest-dev
+  - sudo apt-get install libgtest-dev python3
 
   # Install doxygen without all those lame depends like latex:
   - sudo apt-get --no-install-recommends install doxygen
@@ -44,6 +42,9 @@ before_script:
 
   # Correctly install GoogleTest static libraries:
   - cd /usr/src/gtest; sudo cmake CMakeLists.txt; sudo make; sudo cp *.a /usr/lib; cd -
+
+  # Set python link
+	- sudo rm /usr/bin/python; sudo ln -s /usr/bin/python3.3 python
 
 script:
   - "./build.py"

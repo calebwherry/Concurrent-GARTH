@@ -44,7 +44,7 @@ before_script:
   - cd /usr/src/gtest; sudo cmake CMakeLists.txt; sudo make; sudo cp *.a /usr/lib; cd -
 
 script:
-  - "./build.sh"
+  - "./build.py"
 
 notifications:
   recipients:

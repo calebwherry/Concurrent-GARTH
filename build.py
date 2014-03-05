@@ -20,12 +20,13 @@
 #
 # Imports:
 #
-import shutil, subprocess
+import subprocess
 from os import path, getcwd, mkdir, chdir
 from sys import exit, argv
 from platform import system
 from time import time
 from datetime import datetime
+from shutil import rmtree
 
 
 #
@@ -85,10 +86,20 @@ def unixBuild(log):
 #
 # Build function: Windows
 #
-def windowsBuild(logFile):
+def windowsBuild(log):
 	print('Starting Windows build...')
 	print('')
-	print('TODO: Figure out what needs to be done to make this work automatically from the cmd line.')
+
+  
+	# Run msbuild:
+	print("Running 'msbuild'... ", end='')
+	returnCode = subprocess.call(["msbuild", "ALL_BUILD.vcxproj"], stdout=log, stderr=subprocess.STDOUT)
+	
+	if returnCode != 0:
+		print('ERROR!!! Please see log file for details: ' + log.name)
+		exit(1)
+
+	print('done!')
 
 
 
@@ -127,7 +138,7 @@ def main():
 
 	# On all platforms, we at least have to run cmake first to get build files built:
 	print("Running 'cmake'...", end='')
-	returnCode = subprocess.call(["cmake", scriptPath, "-DCMAKE_INSTALL_PREFIX="+installFiles], stdout=log, stderr=subprocess.STDOUT)
+	returnCode = subprocess.call(["cmake", scriptPath, "-DCMAKE_INSTALL_PREFIX=" + installFiles], stdout=log, stderr=subprocess.STDOUT)
 
 	if returnCode != 0:
 		print('ERROR!!! Please see log file for details: ' + log.name)
@@ -142,7 +153,7 @@ def main():
 	elif localOS == 'Windows':
 		windowsBuild(log)
 	else:
-		print('**ERROR**: OS platform not recognized; aborting!')
+		print('**ERROR**: OS platform "' + localOS + '" not recognized; aborting!')
 		exit(1)
 
 	# Move back to script location and close log file:
@@ -150,7 +161,7 @@ def main():
 	log.close()
 
 	# Remove build directory if everything up till now has not exited:
-	shutil.rmtree(buildRoot)
+	rmtree(buildRoot)
   
 	# End execution time:
 	endTime = time()

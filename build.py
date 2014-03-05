@@ -145,9 +145,13 @@ def main():
 		print('**ERROR**: OS platform not recognized; aborting!')
 		exit(1)
 
+	# Move back to script location and close log file:
+	chdir(scriptPath)
+	log.close()
+
 	# Remove build directory if everything up till now has not exited:
 	shutil.rmtree(buildRoot)
-
+  
 	# End execution time:
 	endTime = time()
 

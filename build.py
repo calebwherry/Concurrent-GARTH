@@ -20,7 +20,7 @@
 #
 # Imports:
 #
-import subprocess
+import argparse, subprocess
 from os import path, getcwd, mkdir, chdir
 from sys import exit, argv
 from platform import system
@@ -127,6 +127,27 @@ def main():
 
 	# Start time for script:
 	startTime = time()
+
+
+	#
+	# Argument parsing:
+	#
+	parser = argparse.ArgumentParser()
+	parser.add_argument("-c", "--clean", help="Remove all directories matching 'local-build_*', then exit.", action="store_true")
+	parser.add_argument("-k", "--keep-build", help="Keep build directory, do not delete.", action="store_true")
+	parser.add_argument("-v", "--verbose", help="Provide verbose output.", action="store_true")
+	args = parser.parse_args()
+
+
+
+	#
+	# Clean build directories if clean specified:
+	#
+	if args.clean:
+		#rmtree('local-build_*')
+		print("Removed all build directories matching 'local-build_*'.")
+		exit(0)
+
 
 	# Get timestamp:
 	timeStamp = datetime.fromtimestamp(time()).strftime('%Y-%m-%d_%H-%M-%S')

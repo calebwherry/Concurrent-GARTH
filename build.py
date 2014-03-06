@@ -141,7 +141,7 @@ def main():
 	localOS = system()
 
 	# Create build directories and cd into them:
-	buildRoot = path.join(currentPath, 'build_' + timeStamp)
+	buildRoot = path.join(currentPath, 'local-build_' + timeStamp)
 	buildFiles = path.join(buildRoot, 'build_files')
 	installFiles = path.join(buildRoot, 'install_files')
 	mkdir(buildRoot)

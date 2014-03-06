@@ -2,7 +2,7 @@
 
 # Concurrent-GARTH
 
-Concurrent GARTH (Genetic AlgoRiTHms) in C++: A Framework for Concurrent GAs.
+Concurrent GARTH (Genetic AlgoRiTHms) using C++: A Framework for Concurrent GAs.
 
 Continuous integration is implemented on this repository using Travis-CI.
 

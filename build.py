@@ -29,6 +29,18 @@ from datetime import datetime
 from shutil import rmtree
 
 
+
+#
+# Print logfile to stdout function:
+#
+def displayLog(logFile):
+
+	# Open file and print it to stdout:
+	with open(logFile, 'r') as fin:
+		print(fin.read())
+
+
+
 #
 # Build function: Unix
 #
@@ -44,6 +56,7 @@ def unixBuild(log):
 	
 	if returnCode != 0:
 		print('ERROR!!! Please see log file for details: ' + log.name)
+		displayLog(log.name)
 		exit(1)
 
 	print('done!')
@@ -55,6 +68,7 @@ def unixBuild(log):
 
 	if returnCode != 0:
 		print('ERROR!!! Please see log file for details: ' + log.name)
+		displayLog(log.name)
 		exit(1)
 
 	print('done!')
@@ -66,6 +80,7 @@ def unixBuild(log):
 
 	if returnCode != 0:
 		print('ERROR!!! Please see log file for details: ' + log.name)
+		displayLog(log.name)
 		exit(1)
 
 	print('done!')
@@ -77,6 +92,7 @@ def unixBuild(log):
 
 	if returnCode != 0:
 		print('ERROR!!! Please see log file for details: ' + log.name)
+		displayLog(log.name)
 		exit(1)
 
 	print('done!')
@@ -97,6 +113,7 @@ def windowsBuild(log):
 	
 	if returnCode != 0:
 		print('ERROR!!! Please see log file for details: ' + log.name)
+		displayLog(log.name)
 		exit(1)
 
 	print('done!')
@@ -142,6 +159,7 @@ def main():
 
 	if returnCode != 0:
 		print('ERROR!!! Please see log file for details: ' + log.name)
+		displayLog(log.name)
 		exit(1)
 
 	print('done!')

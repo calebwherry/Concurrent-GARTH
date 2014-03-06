@@ -27,16 +27,16 @@ from platform import system
 from time import time
 from datetime import datetime
 from shutil import rmtree
-
+from glob import glob
 
 
 #
 # Print logfile to stdout function:
 #
-def displayLog(logFile):
+def displayLog(log):
 
 	# Open file and print it to stdout:
-	with open(logFile, 'r') as fin:
+	with open(log.name, 'r') as fin:
 		print(fin.read())
 
 
@@ -56,7 +56,7 @@ def unixBuild(log):
 	
 	if returnCode != 0:
 		print('ERROR!!! Please see log file for details: ' + log.name)
-		displayLog(log.name)
+		displayLog(log)
 		exit(1)
 
 	print('done!')
@@ -68,7 +68,7 @@ def unixBuild(log):
 
 	if returnCode != 0:
 		print('ERROR!!! Please see log file for details: ' + log.name)
-		displayLog(log.name)
+		displayLog(log)
 		exit(1)
 
 	print('done!')
@@ -80,7 +80,7 @@ def unixBuild(log):
 
 	if returnCode != 0:
 		print('ERROR!!! Please see log file for details: ' + log.name)
-		displayLog(log.name)
+		displayLog(log)
 		exit(1)
 
 	print('done!')
@@ -92,7 +92,7 @@ def unixBuild(log):
 
 	if returnCode != 0:
 		print('ERROR!!! Please see log file for details: ' + log.name)
-		displayLog(log.name)
+		displayLog(log)
 		exit(1)
 
 	print('done!')
@@ -113,7 +113,7 @@ def windowsBuild(log):
 	
 	if returnCode != 0:
 		print('ERROR!!! Please see log file for details: ' + log.name)
-		displayLog(log.name)
+		displayLog(log)
 		exit(1)
 
 	print('done!')
@@ -135,7 +135,7 @@ def main():
 	parser = argparse.ArgumentParser()
 	parser.add_argument("-c", "--clean", help="Remove all directories matching 'local-build_*', then exit.", action="store_true")
 	parser.add_argument("-k", "--keep-build", help="Keep build directory, do not delete.", action="store_true")
-	parser.add_argument("-v", "--verbose", help="Provide verbose output.", action="store_true")
+	parser.add_argument("-d", "--display-log", help="Display log to stdout at script end.", action="store_true")
 	args = parser.parse_args()
 
 
@@ -144,8 +144,11 @@ def main():
 	# Clean build directories if clean specified:
 	#
 	if args.clean:
-		#rmtree('local-build_*')
-		print("Removed all build directories matching 'local-build_*'.")
+		print("Removing all build directores matching 'local-build_*'... ", end='')
+		buildDirs = glob('local-build_*')
+		buildDirs = filter(path.isdir, buildDirs)
+		for dir in buildDirs: rmtree(dir)
+		print('done!')
 		exit(0)
 
 
@@ -156,6 +159,8 @@ def main():
 	currentPath = path.abspath(getcwd())
 
 	# Get script path:
+	# TODO: This SHOULD be cross-platform but some people say it isn't because of the argv... 
+	#	I have yet to come across a situation where this fails so I'm leaving it.
 	scriptPath = path.abspath(path.dirname(argv[0]))
 
 	# Get OS:
@@ -180,7 +185,7 @@ def main():
 
 	if returnCode != 0:
 		print('ERROR!!! Please see log file for details: ' + log.name)
-		displayLog(log.name)
+		displayLog(log)
 		exit(1)
 
 	print('done!')
@@ -195,12 +200,23 @@ def main():
 		print('**ERROR**: OS platform "' + localOS + '" not recognized; aborting!')
 		exit(1)
 
-	# Move back to script location and close log file:
-	chdir(scriptPath)
+	# Dislay log if cmd argument set:
+	if args.display_log:
+		print('')
+		print('#############################')
+		print('Dumping log file: ' + log.name)
+		print('#############################')
+		print('')
+		displayLog(log)
+		print('')
+
+	# Close log file:
 	log.close()
 
-	# Remove build directory if everything up till now has not exited:
-	rmtree(buildRoot)
+	# Remove build directory if everything up till now has not exited and keep build flag not set:
+	chdir(scriptPath)
+	if not args.keep_build:
+		rmtree(buildRoot)
   
 	# End execution time:
 	endTime = time()
@@ -208,6 +224,7 @@ def main():
 	# Display build script execution time:
 	print('')
 	print('Build script executed in %g seconds!' % (endTime - startTime))
+	print('')
 
 
 #

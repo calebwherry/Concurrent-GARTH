@@ -179,7 +179,7 @@ def main():
 	log.close()
 
 	# Remove build directory if everything up till now has not exited:
-	rmtree(buildRoot)
+	#rmtree(buildRoot)
   
 	# End execution time:
 	endTime = time()

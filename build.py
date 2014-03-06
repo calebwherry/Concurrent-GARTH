@@ -133,11 +133,21 @@ def main():
 	# Argument parsing:
 	#
 	parser = argparse.ArgumentParser()
-	parser.add_argument("-c", "--clean", help="Remove all directories matching 'local-build_*', then exit.", action="store_true")
-	parser.add_argument("-k", "--keep-build", help="Keep build directory, do not delete.", action="store_true")
-	parser.add_argument("-d", "--display-log", help="Display log to stdout at script end.", action="store_true")
+	parser.add_argument("-c", "--clean", help="Remove all build directories in current working directory matching 'local-build_*' and exit.", action="store_true")
+	parser.add_argument("-k", "--keep-build", help="Keep current build directory, do not delete.", action="store_true")
+	parser.add_argument("-d", "--display-log", help="Display build log to stdout.", action="store_true")
 	args = parser.parse_args()
 
+
+
+	#
+	# Build script init output:
+	#
+	print('')
+	print('######################')
+	print('Automated Build Script')
+	print('######################')
+	print('')
 
 
 	#
@@ -180,7 +190,7 @@ def main():
 	log = open(logFile, 'w');
 
 	# On all platforms, we at least have to run cmake first to get build files built:
-	print("Running 'cmake'...", end='')
+	print("Running 'cmake'... ", end='')
 	returnCode = subprocess.call(["cmake", scriptPath, "-DCMAKE_INSTALL_PREFIX=" + installFiles], stdout=log, stderr=subprocess.STDOUT)
 
 	if returnCode != 0:

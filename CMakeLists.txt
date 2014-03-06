@@ -16,6 +16,7 @@
 ########################################
 
 
+
 #
 # CMake version and project name:
 #
@@ -23,28 +24,56 @@ cmake_minimum_required(VERSION 2.8)
 project(Concurrent-GARTH)
 
 
+
 #
 # Check compiler versions:
 #
-## TODO: No worky with Travis-CI environment... why? I believe it is because cmake version on Travis-CI is 2.8.7 and I am running 2.8.11 locally. Must be a fix in there somewhere.
-#if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-#	# require at least gcc 4.8
-#	if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
-#		message(FATAL_ERROR "GCC compiler version must be at least 4.8!")
-#	endif()
-#elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-#	# require at least clang 3.2
-#	if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 3.2)
-#		message(FATAL_ERROR "Clang compiler version must be at least 3.2!")
-#	endif()
-#elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
-#	# require at least MSVC 18.0
-#	if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 18.0)
-#		message(FATAL_ERROR "MSVC compiler version must be at least 18.0!")
-#	endif()
-#else()
-#	message(WARNING "You are using an unsupported compiler! Compilation has only been tested with GCC, Clang, and MSVC.")
-#endif()
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+
+	# Check version. If too old, error out:
+	if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
+		message(FATAL_ERROR "GCC compiler version must be at least 4.8!")
+	endif()
+
+	# Set compiler specific variables:
+	set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=c++11 -Wl,--no-as-needed")
+
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+
+	# Check version. If too old, error out:
+	if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 3.2)
+		message(FATAL_ERROR "Clang compiler version must be at least 3.2!")
+	endif()
+
+	# Set compiler specific variables:
+	set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=c++11")
+
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+
+	# Check version. If too old, error out:
+	if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 18.0)
+		message(FATAL_ERROR "MSVC compiler version must be at least 18.0!")
+	endif()
+
+	# Set compiler specific variables:
+	set(CMAKE_CXX_FLAGS "")
+
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
+
+	# Check version. If too old, error out:
+	if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 14.0)
+		message(FATAL_ERROR "MSVC compiler version must be at least 14.0!")
+	endif()
+
+	# Set compiler specific variables:
+	set(CMAKE_CXX_FLAGS "")
+
+else()
+
+	message(WARNING "The '${CMAKE_CXX_COMPILER_ID}' compiler is untested and unsupported, continue at your own risk!")
+
+endif()
+
 
 
 #

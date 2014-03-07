@@ -134,7 +134,7 @@ def main():
 	#
 	parser = argparse.ArgumentParser()
 	parser.add_argument("-c", "--clean", help="Remove all build directories in current working directory matching 'local-build_*' and exit.", action="store_true")
-	parser.add_argument("-k", "--keep-build", help="Keep current build directory, do not delete.", action="store_true")
+	parser.add_argument("-k", "--keep-build", help="Keep current build directory, do not remove after build completes.", action="store_true")
 	parser.add_argument("-d", "--display-log", help="Display build log to stdout.", action="store_true")
 	args = parser.parse_args()
 

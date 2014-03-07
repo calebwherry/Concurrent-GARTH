@@ -17,12 +17,6 @@
 
 
 #
-# Set app compiler flags:
-#
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
-
-
-#
 # Add include directories for local libraries:
 #
 include_directories(${PROJECT_LIB_DIR}/GarthLib)

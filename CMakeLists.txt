@@ -38,25 +38,25 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 	endif()
 
 	# Set compiler specific variables:
-	set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=c++11 -Wl,--no-as-needed")
+	set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=c++11 -pthread -Wl,--no-as-needed")
 
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 
 	# Check version. If empty, warn. If too old, error out:
-        if ("${CMAKE_CXX_COMPILER_VERSION}" STREQUAL "")
-                message(WARNING "Clang compiler version is unknown, proceed at your own risk!")
+	if ("${CMAKE_CXX_COMPILER_VERSION}" STREQUAL "")
+		message(WARNING "Clang compiler version is unknown, proceed at your own risk!")
 	elseif (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 3.2)
 		message(FATAL_ERROR "Clang compiler version must be at least 3.2!")
 	endif()
 
 	# Set compiler specific variables:
-	set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=c++11")
+	set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=c++11 -pthread")
 
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 
 	# Check version. If empty, warn. If too old, error out:
-        if ("${CMAKE_CXX_COMPILER_VERSION}" STREQUAL "")
-                message(WARNING "MSVC compiler version is unknown, proceed at your own risk!")
+	if ("${CMAKE_CXX_COMPILER_VERSION}" STREQUAL "")
+		message(WARNING "MSVC compiler version is unknown, proceed at your own risk!")
 	elseif (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 18.0)
 		message(FATAL_ERROR "MSVC compiler version must be at least 18.0!")
 	endif()
@@ -67,8 +67,8 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
 
 	# Check version. If empty, warn. If too old, error out:
-        if ("${CMAKE_CXX_COMPILER_VERSION}" STREQUAL "")
-                message(WARNING "Intel compiler version is unknown, proceed at your own risk!")
+	if ("${CMAKE_CXX_COMPILER_VERSION}" STREQUAL "")
+		message(WARNING "Intel compiler version is unknown, proceed at your own risk!")
 	elseif (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 14.0)
 		message(FATAL_ERROR "MSVC compiler version must be at least 14.0!")
 	endif()

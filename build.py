@@ -133,6 +133,7 @@ def main():
 	# Argument parsing:
 	#
 	parser = argparse.ArgumentParser()
+	parser.add_argument("-i", "--install-prefix", help="Prefix for the install directory.", type=str)
 	parser.add_argument("-c", "--clean", help="Remove all build directories in current working directory matching 'local-build_*' and exit.", action="store_true")
 	parser.add_argument("-k", "--keep-build", help="Keep current build directory, do not remove after build completes.", action="store_true")
 	parser.add_argument("-d", "--display-log", help="Display build log to stdout.", action="store_true")
@@ -176,13 +177,22 @@ def main():
 	# Get OS:
 	localOS = system()
 
-	# Create build directories and cd into them:
+	# Create build directories:
 	buildRoot = path.join(currentPath, 'local-build_' + timeStamp)
 	buildFiles = path.join(buildRoot, 'build_files')
 	installFiles = path.join(buildRoot, 'install_files')
 	mkdir(buildRoot)
 	mkdir(buildFiles)
-	mkdir(installFiles)
+
+	# Create install directory if prefix was not supplied:
+	print(args.install_prefix)
+	if args.install_prefix == "None":
+		installFiles = path.join(buildRoot, 'install_files')
+		mkdir(installFiles)
+	else:
+		installFiles = path.join(args.install_prefix)
+
+	# Move into build directory:
 	chdir(buildFiles)
 
 	# Create logfile:

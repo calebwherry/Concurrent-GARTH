@@ -35,3 +35,9 @@ else ()
 	message(FATAL_ERROR "Doxygen comments could not be created because Doxygen was not found on this system; aborting!")
 
 endif ()
+
+
+#
+# Add subdirectories:
+#
+add_subdirectory(papers)

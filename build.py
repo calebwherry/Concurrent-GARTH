@@ -133,7 +133,7 @@ def main():
 	# Argument parsing:
 	#
 	parser = argparse.ArgumentParser()
-	parser.add_argument("-i", "--install-prefix", help="Prefix for the install directory.", type=str)
+	parser.add_argument("-i", "--install-prefix", help="Prefix for the install directory.", type=str, default="")
 	parser.add_argument("-c", "--clean", help="Remove all build directories in current working directory matching 'local-build_*' and exit.", action="store_true")
 	parser.add_argument("-k", "--keep-build", help="Keep current build directory, do not remove after build completes.", action="store_true")
 	parser.add_argument("-d", "--display-log", help="Display build log to stdout.", action="store_true")
@@ -155,11 +155,12 @@ def main():
 	# Clean build directories if clean specified:
 	#
 	if args.clean:
-		print("Removing all build directores matching 'local-build_*'... ", end='')
+		print("Removing all build directories matching 'local-build_*'... ", end='')
 		buildDirs = glob('local-build_*')
 		buildDirs = filter(path.isdir, buildDirs)
 		for dir in buildDirs: rmtree(dir)
 		print('done!')
+		print('')
 		exit(0)
 
 
@@ -180,13 +181,11 @@ def main():
 	# Create build directories:
 	buildRoot = path.join(currentPath, 'local-build_' + timeStamp)
 	buildFiles = path.join(buildRoot, 'build_files')
-	installFiles = path.join(buildRoot, 'install_files')
 	mkdir(buildRoot)
 	mkdir(buildFiles)
 
 	# Create install directory if prefix was not supplied:
-	print(args.install_prefix)
-	if args.install_prefix == "None":
+	if args.install_prefix == "":
 		installFiles = path.join(buildRoot, 'install_files')
 		mkdir(installFiles)
 	else:
@@ -220,7 +219,7 @@ def main():
 		print('**ERROR**: OS platform "' + localOS + '" not recognized; aborting!')
 		exit(1)
 
-	# Dislay log if cmd argument set:
+	# Display log if cmd argument set:
 	if args.display_log:
 		print('')
 		print('#############################')

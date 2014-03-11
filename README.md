@@ -4,7 +4,7 @@
 
 Concurrent GARTH (Genetic AlgoRiTHms) using C++: A Framework for Concurrent GAs.
 
-Continuous integration is implemented on this repository using Travis-CI.
+Continuous integration is implemented on this repository using [Travis-CI](https://travis-ci.org/).
 
 ## Dependencies
 
@@ -25,20 +25,24 @@ This are the dependencies needed to use this library with its applications and a
 
     $ sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
     $ sudo apt-get update
-    $ sudo apt-get install g++-4.8 cmake libgtest-dev python3 python-pip
+    $ sudo apt-get install build-essential g++-4.8 cmake libgtest-dev python3 python-pip
     $ sudo apt-get --no-install-recommends install doxygen
     $ pip install colorama
     $ cd /usr/src/gtest; sudo cmake CMakeLists.txt; sudo make; sudo cp *.a /usr/lib; cd -
 
-You may also need to set a few environment variables/aliases to use the new packages just installed.
+You may also need to set a few environment variables/aliases to use the new packages just installed. Most likely these:
 
     $ export CC="gcc-4.8" CXX="g++-4.8"
 
 ## Installation
 
-Run `build.py` at the root of the repo with the prefix needed for installation.
+Run `build.py` at the root of the repo with the prefix needed for installation:
 
-    $ python3 build.py --install-dir="<INSTALL_DIR>"
+    $ python3 build.py --install-prefix="<INSTALL_DIR>"
+ 
+If you just run the `build.py` script with no arguments, it will create a local out-of-source build and clean up after itself when it is done. This is extremely handy for testing since all you have to do is run `build.py` and see if anything fails. If not, everything will be cleaned up.
+
+To keep the local build files around, supply the `-k, --keep-build` option.
  
 ## Copyright
 

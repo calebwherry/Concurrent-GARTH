@@ -1,10 +1,10 @@
-#! /usr/bin/env python3
+#!/usr/bin/env python3
 ########################################
 ########################################
 ##
-##  Copyright (C) 2014 Korovasoft, Inc.
+##	Copyright (C) 2014 Korovasoft, Inc.
 ##
-##  File:
+##	File:
 ##      \file build.py
 ##
 ##  Description:
@@ -40,7 +40,6 @@ def displayLog(log):
 		print(fin.read())
 
 
-
 #
 # Build function: Unix
 #
@@ -58,7 +57,6 @@ def unixBuild(log):
 		print('ERROR!!! Please see log file for details: ' + log.name)
 		displayLog(log)
 		exit(1)
-
 	print('done!')
 
 
@@ -70,7 +68,6 @@ def unixBuild(log):
 		print('ERROR!!! Please see log file for details: ' + log.name)
 		displayLog(log)
 		exit(1)
-
 	print('done!')
 
 
@@ -82,7 +79,6 @@ def unixBuild(log):
 		print('ERROR!!! Please see log file for details: ' + log.name)
 		displayLog(log)
 		exit(1)
-
 	print('done!')
 
 
@@ -94,7 +90,6 @@ def unixBuild(log):
 		print('ERROR!!! Please see log file for details: ' + log.name)
 		displayLog(log)
 		exit(1)
-
 	print('done!')
 
 
@@ -115,7 +110,6 @@ def windowsBuild(log):
 		print('ERROR!!! Please see log file for details: ' + log.name)
 		displayLog(log)
 		exit(1)
-
 	print('done!')
 
 
@@ -138,7 +132,6 @@ def main():
 	parser.add_argument("-k", "--keep-build", help="Keep current build directory, do not remove after build completes.", action="store_true")
 	parser.add_argument("-d", "--display-log", help="Display build log to stdout.", action="store_true")
 	args = parser.parse_args()
-
 
 
 	#
@@ -180,19 +173,19 @@ def main():
 
 	# Create build directories:
 	buildRoot = path.join(currentPath, 'local-build_' + timeStamp)
-	buildFiles = path.join(buildRoot, 'build_files')
+	buildDir = path.join(buildRoot, 'build_files')
 	mkdir(buildRoot)
-	mkdir(buildFiles)
+	mkdir(buildDir)
 
 	# Create install directory if prefix was not supplied:
 	if args.install_prefix == "":
-		installFiles = path.join(buildRoot, 'install_files')
-		mkdir(installFiles)
+		installDir = path.join(buildRoot, 'install_files')
+		mkdir(installDir)
 	else:
-		installFiles = path.join(args.install_prefix)
+		installDir = path.join(args.install_prefix)
 
 	# Move into build directory:
-	chdir(buildFiles)
+	chdir(buildDir)
 
 	# Create logfile:
 	logFile = path.join(buildRoot, 'build.log')
@@ -200,13 +193,12 @@ def main():
 
 	# On all platforms, we at least have to run cmake first to get build files built:
 	print("Running 'cmake'... ", end='')
-	returnCode = subprocess.call(["cmake", scriptPath, "-DCMAKE_INSTALL_PREFIX=" + installFiles], stdout=log, stderr=subprocess.STDOUT)
+	returnCode = subprocess.call(["cmake", scriptPath, "-DCMAKE_INSTALL_PREFIX=" + installDir], stdout=log, stderr=subprocess.STDOUT)
 
 	if returnCode != 0:
 		print('ERROR!!! Please see log file for details: ' + log.name)
 		displayLog(log)
 		exit(1)
-
 	print('done!')
 	print('')
 

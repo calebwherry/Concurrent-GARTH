@@ -17,5 +17,13 @@
 
 
 #
-# TODO: Create this lib...
+# Create a static library:
 #
+add_library(ConcurrentUtil STATIC ConcurrentUtil.cpp)
+
+
+#
+# Add library headers and archive files to install:
+#
+install(TARGETS ConcurrentUtil DESTINATION lib)
+install(FILES ConcurrentUtil.h DESTINATION include)

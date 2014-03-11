@@ -16,10 +16,11 @@
 ////////////////////////////////////////
 
 
-/// Local includes:
+/// Local Includes:
 ////
 
 /// Compiler Includes:
+#include <ConcurrentUtil.h>
 #include <Garth.h>
 #include <thread>
 #include <vector>
@@ -28,9 +29,9 @@
 /// Namespaces:
 using namespace std;
 using namespace Garth;
+namespace CU = ConcurrentUtil;
 
 /// Function specs:
-uint32_t getNumCores();
 void helloWorld();
 
 
@@ -44,7 +45,7 @@ int main()
 
 	// Get number of cores available:
 	// TOD0: This should probably have a -1 since main runs in its own thread...
-	const uint32_t NUM_THREADS = getNumCores();
+	const uint32_t NUM_THREADS = CU::getNumberCores();
 
 	// How many threads can this system handle?
 	cout << endl << "Cores available: " << NUM_THREADS << endl << endl;
@@ -70,19 +71,6 @@ int main()
 	// Exit status:
 	return 0;
 
-}
-
-
-
-// Get number of cores function:
-uint32_t getNumCores()
-{
-
-	// Initial value from thread library:
-	uint32_t numThreads = thread::hardware_concurrency();
-
-	// Above function could return 0, so we hardcore a value of 4 if that happens:
-	return (numThreads != 0) ? numThreads : 4;
 }
 
 

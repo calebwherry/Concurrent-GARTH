@@ -36,7 +36,7 @@ namespace ConcurrentUtil
 	{
 
 		// Initial core number from thread library:
-		uint32_t numThreads = thread::hardware_concurrency();
+		uint32_t numThreads = std::thread::hardware_concurrency();
 
   	// Above function could return 0, so we hardcore a value of 4 if that happens:
   	return (numThreads != 0) ? numThreads : 4;

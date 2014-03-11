@@ -20,6 +20,7 @@
 # Add include directories for local libraries:
 #
 include_directories(${PROJECT_LIB_DIR}/GarthLib)
+include_directories(${PROJECT_LIB_DIR}/ConcurrentLib)
 
 
 #
@@ -32,6 +33,7 @@ add_executable(concurrent-garth concurrent-garth.cpp)
 # Link libraries:
 #
 target_link_libraries(concurrent-garth Garth)
+target_link_libraries(concurrent-garth ConcurrentUtil)
 
 
 #

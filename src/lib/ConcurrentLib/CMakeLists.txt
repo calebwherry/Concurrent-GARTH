@@ -19,11 +19,12 @@
 #
 # Create a static library:
 #
-add_library(ConcurrentUtil STATIC ConcurrentUtil.cpp)
+add_library(ConcurrentLib STATIC ConcurrentUtil.cpp ConcurrentObjects.cpp)
 
 
 #
 # Add library headers and archive files to install:
 #
-install(TARGETS ConcurrentUtil DESTINATION lib)
+install(TARGETS ConcurrentLib DESTINATION lib)
 install(FILES ConcurrentUtil.h DESTINATION include)
+install(FILES ConcurrentObjects.h DESTINATION include)

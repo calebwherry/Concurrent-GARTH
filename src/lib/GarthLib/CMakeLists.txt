@@ -19,11 +19,11 @@
 #
 # Create a static library:
 #
-add_library(Garth STATIC Garth.cpp)
+add_library(GarthLib STATIC Garth.cpp)
 
 
 #
 # Add library headers and archive files to install:
 #
-install(TARGETS Garth DESTINATION lib)
+install(TARGETS GarthLib DESTINATION lib)
 install(FILES Garth.h DESTINATION include)

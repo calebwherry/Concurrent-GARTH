@@ -32,8 +32,7 @@ add_executable(concurrent-garth concurrent-garth.cpp)
 #
 # Link libraries:
 #
-target_link_libraries(concurrent-garth Garth)
-target_link_libraries(concurrent-garth ConcurrentUtil)
+target_link_libraries(concurrent-garth ConcurrentLib GarthLib)
 
 
 #

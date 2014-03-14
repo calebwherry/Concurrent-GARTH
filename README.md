@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/calebwherry/Cpp-Libraries.png)](https://travis-ci.org/calebwherry/Concurrent-GARTH)
 [![License](https://poser.pugx.org/leaphly/cart-bundle/license.png)](https://packagist.org/packages/leaphly/cart-bundle)
 
 # Concurrent-GARTH

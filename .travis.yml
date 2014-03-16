@@ -39,12 +39,15 @@ install:
   - sudo apt-get --no-install-recommends install doxygen
 
   # Install python modules:
-  - sudo python3 pip install colorama
+  - sudo pip install colorama
 
 before_script:
 
   # Correctly install GoogleTest static libraries:
   - cd /usr/src/gtest; sudo cmake CMakeLists.txt; sudo make; sudo cp *.a /usr/lib; cd -
+
+  # Put colorama package in correct place:
+  - sudo cp /usr/local/lib/python2.7/dist-packages/colorama/* /usr/local/lib/python3.3/dist-packages/colorama/
 
 script:
   - "./build.py"

@@ -36,9 +36,22 @@ from colorama import init, Fore
 #
 def displayLog(log):
 
+	print('')
+	print(Fore.CYAN + '#############################')
+	print(Fore.CYAN + 'Dumping log file: ' + log.name)
+	print(Fore.CYAN + '#############################')
+	print('')
+
 	# Open file and print it to stdout:
 	with open(log.name, 'r') as fin:
 		print(fin.read())
+
+	print('')
+	print(Fore.CYAN + '#############################')
+	print(Fore.CYAN + 'End log dump.')
+	print(Fore.CYAN + '#############################')
+	print('')
+
 
 
 #
@@ -123,7 +136,9 @@ def windowsBuild(log):
 #
 def main():
 
+	#
 	# Start time for script:
+	#
 	startTime = time()
 
 
@@ -217,17 +232,7 @@ def main():
 
 	# Display log if cmd argument set:
 	if args.display_log:
-		print('')
-		print('#############################')
-		print('Dumping log file: ' + log.name)
-		print('#############################')
-		print('')
 		displayLog(log)
-		print('')
-		print('#############################')
-		print('End log dump.')
-		print('#############################')
-		print('')
 
 	# Close log file:
 	log.close()

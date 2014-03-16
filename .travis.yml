@@ -48,7 +48,7 @@ before_script:
 
   # Put colorama package in correct place:
   - python3 --version
-	- exit 0
+  - exit 0
   - sudo mkdir /usr/local/lib/python3.3/dist-packages/colorama/
   - sudo cp /usr/local/lib/python2.7/dist-packages/colorama/* /usr/local/lib/python3.3/dist-packages/colorama/
 

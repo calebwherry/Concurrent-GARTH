@@ -46,11 +46,9 @@ def displayLog(log):
 def unixBuild(log):
 
 	print('Starting UNIX build...')
-	print('')
-
 
 	# Run make:
-	print("Running 'make'... ", end='')
+	print("\tRunning 'make'... ", end='')
 	returnCode = subprocess.call(["make"], stdout=log, stderr=subprocess.STDOUT)
 	
 	if returnCode != 0:
@@ -61,7 +59,7 @@ def unixBuild(log):
 
 
 	# Run make test:
-	print("Running 'make test'... ", end='')
+	print("\tRunning 'make test'... ", end='')
 	returnCode = subprocess.call(["make", "test"], stdout=log, stderr=subprocess.STDOUT)
 
 	if returnCode != 0:
@@ -72,7 +70,7 @@ def unixBuild(log):
 
 
 	# Run make doc:
-	print("Running 'make doc'... ", end='')
+	print("\tRunning 'make doc'... ", end='')
 	returnCode = subprocess.call(["make", "doc"], stdout=log, stderr=subprocess.STDOUT)
 
 	if returnCode != 0:
@@ -83,7 +81,7 @@ def unixBuild(log):
 
 
 	# Run make install:
-	print("Running 'make install'... ", end='')
+	print("\tRunning 'make install'... ", end='')
 	returnCode = subprocess.call(["make", "install"], stdout=log, stderr=subprocess.STDOUT)
 
 	if returnCode != 0:
@@ -92,6 +90,10 @@ def unixBuild(log):
 		exit(1)
 	print('done!')
 
+	# End of unix build:
+	print('UNIX build complete!')
+	print('')
+
 
 
 #
@@ -99,11 +101,9 @@ def unixBuild(log):
 #
 def windowsBuild(log):
 	print('Starting Windows build...')
-	print('')
-
   
 	# Run msbuild:
-	print("Running 'msbuild'... ", end='')
+	print("\tRunning 'msbuild'... ", end='')
 	returnCode = subprocess.call(["msbuild", "ALL_BUILD.vcxproj"], stdout=log, stderr=subprocess.STDOUT)
 	
 	if returnCode != 0:
@@ -112,6 +112,9 @@ def windowsBuild(log):
 		exit(1)
 	print('done!')
 
+	# End of windows build:
+	print('Windows build complete!')
+	print('')
 
 
 #
@@ -220,6 +223,10 @@ def main():
 		print('')
 		displayLog(log)
 		print('')
+		print('#############################')
+		print('End log dump.')
+		print('#############################')
+		print('')
 
 	# Close log file:
 	log.close()
@@ -227,13 +234,15 @@ def main():
 	# Remove build directory if everything up till now has not exited and keep build flag not set:
 	chdir(scriptPath)
 	if not args.keep_build:
+		print('Removing current build directory (-k, --keep-build to disable)... ', end='')
 		rmtree(buildRoot)
+		print('done!')
+		print('')
   
 	# End execution time:
 	endTime = time()
 
 	# Display build script execution time:
-	print('')
 	print('Build script executed in %g seconds!' % (endTime - startTime))
 	print('')
 

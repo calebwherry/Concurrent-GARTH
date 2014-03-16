@@ -33,10 +33,13 @@ install:
   - if [ "${CXX}" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
 
   # Install GoogleTest testing framework:
-  - sudo apt-get install libgtest-dev python3
+  - sudo apt-get install libgtest-dev python3 python-pip
 
   # Install doxygen without all those lame depends like latex:
   - sudo apt-get --no-install-recommends install doxygen
+
+  # Install python modules:
+  - sudo pip3.3 install colorama
 
 before_script:
 

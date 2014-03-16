@@ -46,7 +46,8 @@ before_script:
   # Correctly install GoogleTest static libraries:
   - cd /usr/src/gtest; sudo cmake CMakeLists.txt; sudo make; sudo cp *.a /usr/lib; cd -
 
-  # Put colorama package in correct place:
+  # Put installed colorama package in correct place for new python version. This is extremely sloppy and nasty but 
+  #  it is the quickest way I could it to work on Travis:
   - sudo mkdir /usr/local/lib/python3.2/dist-packages/colorama/
   - sudo cp /usr/local/lib/python2.7/dist-packages/colorama/* /usr/local/lib/python3.2/dist-packages/colorama/
 

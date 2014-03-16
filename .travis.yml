@@ -47,6 +47,7 @@ before_script:
   - cd /usr/src/gtest; sudo cmake CMakeLists.txt; sudo make; sudo cp *.a /usr/lib; cd -
 
   # Put colorama package in correct place:
+	- sudo mkdir /usr/local/lib/python3.3/dist-packages/colorama/
   - sudo cp /usr/local/lib/python2.7/dist-packages/colorama/* /usr/local/lib/python3.3/dist-packages/colorama/
 
 script:

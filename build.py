@@ -28,6 +28,7 @@ from time import time
 from datetime import datetime
 from shutil import rmtree
 from glob import glob
+from colorama import init, Fore
 
 
 #
@@ -52,10 +53,10 @@ def unixBuild(log):
 	returnCode = subprocess.call(["make"], stdout=log, stderr=subprocess.STDOUT)
 	
 	if returnCode != 0:
-		print('ERROR!!! Please see log file for details: ' + log.name)
+		print(Fore.RED + 'ERROR!!! Please see log file for details: ' + log.name)
 		displayLog(log)
 		exit(1)
-	print('done!')
+	print(Fore.GREEN + 'done!')
 
 
 	# Run make test:
@@ -63,10 +64,10 @@ def unixBuild(log):
 	returnCode = subprocess.call(["make", "test"], stdout=log, stderr=subprocess.STDOUT)
 
 	if returnCode != 0:
-		print('ERROR!!! Please see log file for details: ' + log.name)
+		print(Fore.RED + 'ERROR!!! Please see log file for details: ' + log.name)
 		displayLog(log)
 		exit(1)
-	print('done!')
+	print(Fore.GREEN + 'done!')
 
 
 	# Run make doc:
@@ -74,10 +75,10 @@ def unixBuild(log):
 	returnCode = subprocess.call(["make", "doc"], stdout=log, stderr=subprocess.STDOUT)
 
 	if returnCode != 0:
-		print('ERROR!!! Please see log file for details: ' + log.name)
+		print(Fore.RED + 'ERROR!!! Please see log file for details: ' + log.name)
 		displayLog(log)
 		exit(1)
-	print('done!')
+	print(Fore.GREEN + 'done!')
 
 
 	# Run make install:
@@ -85,10 +86,10 @@ def unixBuild(log):
 	returnCode = subprocess.call(["make", "install"], stdout=log, stderr=subprocess.STDOUT)
 
 	if returnCode != 0:
-		print('ERROR!!! Please see log file for details: ' + log.name)
+		print(Fore.RED + 'ERROR!!! Please see log file for details: ' + log.name)
 		displayLog(log)
 		exit(1)
-	print('done!')
+	print(Fore.GREEN + 'done!')
 
 	# End of unix build:
 	print('UNIX build complete!')
@@ -107,10 +108,10 @@ def windowsBuild(log):
 	returnCode = subprocess.call(["msbuild", "ALL_BUILD.vcxproj"], stdout=log, stderr=subprocess.STDOUT)
 	
 	if returnCode != 0:
-		print('ERROR!!! Please see log file for details: ' + log.name)
+		print(Fore.RED + 'ERROR!!! Please see log file for details: ' + log.name)
 		displayLog(log)
 		exit(1)
-	print('done!')
+	print(Fore.GREEN + 'done!')
 
 	# End of windows build:
 	print('Windows build complete!')
@@ -141,9 +142,9 @@ def main():
 	# Build script init output:
 	#
 	print('')
-	print('######################')
-	print('Automated Build Script')
-	print('######################')
+	print(Fore.MAGENTA + '######################')
+	print(Fore.MAGENTA + 'Automated Build Script')
+	print(Fore.MAGENTA + '######################')
 	print('')
 
 
@@ -155,7 +156,7 @@ def main():
 		buildDirs = glob('local-build_*')
 		buildDirs = filter(path.isdir, buildDirs)
 		for dir in buildDirs: rmtree(dir)
-		print('done!')
+		print(Fore.GREEN + 'done!')
 		print('')
 		exit(0)
 
@@ -199,10 +200,10 @@ def main():
 	returnCode = subprocess.call(["cmake", scriptPath, "-DCMAKE_INSTALL_PREFIX=" + installDir], stdout=log, stderr=subprocess.STDOUT)
 
 	if returnCode != 0:
-		print('ERROR!!! Please see log file for details: ' + log.name)
+		print(Fore.RED + 'ERROR!!! Please see log file for details: ' + log.name)
 		displayLog(log)
 		exit(1)
-	print('done!')
+	print(Fore.GREEN + 'done!')
 	print('')
 
 	# Run build based on platform from this point on:
@@ -211,7 +212,7 @@ def main():
 	elif localOS == 'Windows':
 		windowsBuild(log)
 	else:
-		print('**ERROR**: OS platform "' + localOS + '" not recognized; aborting!')
+		print(Fore.RED + '**ERROR**: OS platform "' + localOS + '" not recognized; aborting!')
 		exit(1)
 
 	# Display log if cmd argument set:
@@ -236,14 +237,14 @@ def main():
 	if not args.keep_build:
 		print('Removing current build directory (-k, --keep-build to disable)... ', end='')
 		rmtree(buildRoot)
-		print('done!')
+		print(Fore.GREEN + 'done!')
 		print('')
   
 	# End execution time:
 	endTime = time()
 
 	# Display build script execution time:
-	print('Build script executed in %g seconds!' % (endTime - startTime))
+	print(Fore.MAGENTA + 'Build script executed in %g seconds!' % (endTime - startTime))
 	print('')
 
 
@@ -251,4 +252,15 @@ def main():
 # Main:
 #
 if __name__ == "__main__":
+
+
+	#
+	# Init colorama:
+	#
+	init(autoreset=True)
+
+
+	#
+	# Call main function:
+	#
 	main()

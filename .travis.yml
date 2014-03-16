@@ -39,7 +39,7 @@ install:
   - sudo apt-get --no-install-recommends install doxygen
 
   # Install python modules:
-  - sudo pip3.3 install colorama
+  - sudo python3 pip install colorama
 
 before_script:
 

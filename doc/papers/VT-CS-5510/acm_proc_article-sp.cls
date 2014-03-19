@@ -206,13 +206,13 @@
 \@itempenalty     -\@lowpenalty % Between list items.
 
 %\@namedef{ds@10pt}{\@latexerr{The `10pt' option is not allowed in the `acmconf'
-\@namedef{ds@10pt}{\ClassError{The `10pt' option is not allowed in the `acmconf'	% January 2008
+\@namedef{ds@10pt}{\ClassError{The `10pt' option is not allowed in the `acmconf'  % January 2008
   document style.}\@eha}
 %\@namedef{ds@11pt}{\@latexerr{The `11pt' option is not allowed in the `acmconf'
-\@namedef{ds@11pt}{\ClassError{The `11pt' option is not allowed in the `acmconf'	% January 2008
+\@namedef{ds@11pt}{\ClassError{The `11pt' option is not allowed in the `acmconf'  % January 2008
   document style.}\@eha}
 %\@namedef{ds@12pt}{\@latexerr{The `12pt' option is not allowed in the `acmconf'
-\@namedef{ds@12pt}{\ClassError{The `12pt' option is not allowed in the `acmconf'	% January 2008
+\@namedef{ds@12pt}{\ClassError{The `12pt' option is not allowed in the `acmconf'  % January 2008
   document style.}\@eha}
 
 \@options
@@ -463,7 +463,7 @@
 %  allowed in the `acmconf' document style.}\@eha}
 
 \def\tableofcontents{\ClassError{%
-    \string\tableofcontents\space is not allowed in the `acmconf' document	% January 2008
+    \string\tableofcontents\space is not allowed in the `acmconf' document  % January 2008
     style}\@eha}
 
 \def\l@part#1#2{\addpenalty{\@secpenalty}
@@ -501,7 +501,7 @@
 %  allowed in the `acmconf' document style.}\@eha}
 
 \def\listoffigures{\ClassError{%
-    \string\listoffigures\space is not allowed in the `acmconf' document	% January 2008
+    \string\listoffigures\space is not allowed in the `acmconf' document  % January 2008
     style}\@eha}
 
 \def\l@figure{\@dottedtocline{1}{1.5em}{2.3em}}
@@ -511,7 +511,7 @@
 %\let\l@table\l@figure
 
 \def\listoftables{\ClassError{%
-    \string\listoftables\space is not allowed in the `acmconf' document		% January 2008
+    \string\listoftables\space is not allowed in the `acmconf' document   % January 2008
     style}\@eha}
  \let\l@table\l@figure
 
@@ -558,7 +558,7 @@
 \def\fnum@figure{Figure \thefigure}
 \def\figure{\@float{figure}}
 %\let\endfigure\end@float
-\def\endfigure{\end@float} 		% Gerry January 2008
+\def\endfigure{\end@float}    % Gerry January 2008
 \@namedef{figure*}{\@dblfloat{figure}}
 \@namedef{endfigure*}{\end@dblfloat}
 
@@ -570,7 +570,7 @@
 \def\fnum@table{Table \thetable}
 \def\table{\@float{table}}
 %\let\endtable\end@float
-\def\endtable{\end@float}		% Gerry January 2008
+\def\endtable{\end@float}   % Gerry January 2008
 \@namedef{table*}{\@dblfloat{table}}
 \@namedef{endtable*}{\end@dblfloat}
 
@@ -855,7 +855,7 @@
 %  `acmconf' document style.}\@eha}
 
 \def\marginpar{\ClassError{%
-    \string\marginpar\space is not allowed in the `acmconf' document		% January 2008
+    \string\marginpar\space is not allowed in the `acmconf' document    % January 2008
     style}\@eha}
 
 \mark{{}{}}     % Initializes TeX's marks
@@ -958,7 +958,7 @@
         \hskip \labelsep
         {\it #2%
 %         \savebox\@tempboxa{#3}%
-         \saveb@x\@tempboxa{#3}%		% January 2008
+         \saveb@x\@tempboxa{#3}%    % January 2008
          \ifdim \wd\@tempboxa>\z@
             \ \box\@tempboxa
          \fi.%
@@ -1233,22 +1233,22 @@
     \@ifstar{\@citeNB\@@cite}{\@normalcite\@@cite}%
 }
 %\def\cite{\start@cite23}
-\DeclareRobustCommand\cite{\start@cite23}		% January 2008
-\def\citeNP{\cite*}					% No Parentheses e.g. 5
+\DeclareRobustCommand\cite{\start@cite23}   % January 2008
+\def\citeNP{\cite*}         % No Parentheses e.g. 5
 %\def\citeA{\start@cite10}
-\DeclareRobustCommand\citeA{\start@cite10}		% January 2008
+\DeclareRobustCommand\citeA{\start@cite10}    % January 2008
 \def\citeANP{\citeA*}
-%\def\shortcite{\start@cite23}				
-\DeclareRobustCommand\shortcite{\start@cite23}		% January 2008
+%\def\shortcite{\start@cite23}        
+\DeclareRobustCommand\shortcite{\start@cite23}    % January 2008
 \def\shortciteNP{\shortcite*}
 %\def\shortciteA{\start@cite20}
-\DeclareRobustCommand\shortciteA{\start@cite20}		% January 2008
+\DeclareRobustCommand\shortciteA{\start@cite20}   % January 2008
 \def\shortciteANP{\shortciteA*}
 %\def\citeyear{\start@cite30}
-\DeclareRobustCommand\citeyear{\start@cite30}		% January 2008
+\DeclareRobustCommand\citeyear{\start@cite30}   % January 2008
 \def\citeyearNP{\citeyear*}
 %\def\citeN{%
-\DeclareRobustCommand\citeN{%				% January 2008
+\DeclareRobustCommand\citeN{%       % January 2008
     \@citeRB
     \def\citeauthoryear##1##2##3{##1\ [##3%
         \def\reserved@a{##1}%
@@ -1266,7 +1266,7 @@
     \@ifstar\@citeyear\@citeyear
 }
 %\def\shortciteN{%
-\DeclareRobustCommand\shortciteN{%			% January 2008
+\DeclareRobustCommand\shortciteN{%      % January 2008
     \@citeRB
     \def\citeauthoryear##1##2##3{##2\ [##3%
         \def\reserved@a{##2}%
@@ -1287,13 +1287,13 @@
 \def\@citenormal{%
     \@ifnextchar [{\@tempswatrue\@citex;}%
 % original                 {\@tempswafalse\@citex,[]}% was ; Gerry 2/24/00
-{\@tempswafalse\@citex[]}%  	% GERRY FIX FOR BABEL 3/20/2009
+{\@tempswafalse\@citex[]}%    % GERRY FIX FOR BABEL 3/20/2009
 }
 
 \def\@citeyear{%
     \@ifnextchar [{\@tempswatrue\@citex,}%
 % original                  {\@tempswafalse\@citex,[]}%
-{\@tempswafalse\@citex[]}%	%  GERRY FIX FOR BABEL 3/20/2009
+{\@tempswafalse\@citex[]}%  %  GERRY FIX FOR BABEL 3/20/2009
 }
 
 \def\@citex#1[#2]#3{%
@@ -1302,7 +1302,7 @@
         \@for\@citeb:=#3\do{%
             \@citea
 % original            \def\@citea{#1 }%
-            \def\@citea{#1, }% 	% GERRY FIX FOR BABEL 3/20/2009 -- SO THAT YOU GET [1, 2] IN THE BODY TEXT
+            \def\@citea{#1, }%  % GERRY FIX FOR BABEL 3/20/2009 -- SO THAT YOU GET [1, 2] IN THE BODY TEXT
             \edef\@citeb{\expandafter\@iden\@citeb}%
             \if@filesw
                 \immediate\write\@auxout{\string\citation{\@citeb}}%
@@ -1358,7 +1358,7 @@
 \newcount\colcntr
 \global\colcntr=0
 %\newbox\savebox
-\newbox\saveb@x				% January 2008
+\newbox\saveb@x       % January 2008
 
 \gdef \@makecol {%
 \global\advance\colcntr by 1

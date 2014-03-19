@@ -1,7 +1,7 @@
 ////////////////////////////////////////
 ////////////////////////////////////////
 //
-//	Copyright (C) 2014 Korovasoft, Inc.
+//  Copyright (C) 2014 Korovasoft, Inc.
 //
 //  File:
 //      \file ConcurrentObjects.h
@@ -38,30 +38,30 @@
 namespace ConcurrentObjects
 {
 
-	/// ConcurrentCounter data structure
-	class ConcurrentCounter
-	{
+  /// ConcurrentCounter data structure
+  class ConcurrentCounter
+  {
 
-		private:
+    private:
 
-			uint32_t maxCount;
-			std::atomic<uint32_t> currentCount;
+      uint32_t maxCount;
+      std::atomic<uint32_t> currentCount;
 
-		public:
+    public:
 
-			// Default constructor
-			ConcurrentCounter();
+      // Default constructor
+      ConcurrentCounter();
 
-			/// Custom constructor
-			ConcurrentCounter(uint32_t _maxCount);
+      /// Custom constructor
+      ConcurrentCounter(uint32_t _maxCount);
 
-			/// Increment count
-			void increment();
+      /// Increment count
+      void increment();
 
-			/// Get count
-			uint32_t getCount();
+      /// Get count
+      uint32_t getCount();
 
-	};
+  };
 
 } // ConcurrentObjects namespace
 

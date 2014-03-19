@@ -1,7 +1,7 @@
 ////////////////////////////////////////
 ////////////////////////////////////////
 //
-//	Copyright (C) 2014 Korovasoft, Inc.
+//  Copyright (C) 2014 Korovasoft, Inc.
 //
 //  File:
 //      \file ConcurrentUtil.h
@@ -37,7 +37,7 @@
 namespace ConcurrentUtil
 {
 
-	uint32_t getNumberCores();
+  uint32_t getNumberCores();
 
 } // ConcurrentUtil namespace
 

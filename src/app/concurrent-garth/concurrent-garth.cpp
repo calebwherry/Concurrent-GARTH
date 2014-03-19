@@ -38,7 +38,7 @@ void helloWorld();
 
 /// Global vars/objs:
 uint32_t MAX_COUNT = 100000000,
-				 NUM_THREADS;
+         NUM_THREADS;
 CO::ConcurrentCounter counter(MAX_COUNT);
 
 
@@ -46,42 +46,42 @@ CO::ConcurrentCounter counter(MAX_COUNT);
 int main()
 {
 
-	// Test GarthLib:
-	GarthEngine engine;
-	engine.start();
-	engine.stop();
+  // Test GarthLib:
+  GarthEngine engine;
+  engine.start();
+  engine.stop();
 
 
-	// Get number of cores available:
-	// TOD0: This should probably have a -1 since main runs in its own thread...
-	NUM_THREADS = CU::getNumberCores();
+  // Get number of cores available:
+  // TOD0: This should probably have a -1 since main runs in its own thread...
+  NUM_THREADS = CU::getNumberCores();
 
-	// How many threads can this system handle?
-	cout << endl << "Cores available: " << NUM_THREADS << endl << endl;
-	
-	// Vector of threads:
-	vector<thread> threads;
+  // How many threads can this system handle?
+  cout << endl << "Cores available: " << NUM_THREADS << endl << endl;
+  
+  // Vector of threads:
+  vector<thread> threads;
 
-	// Create threads:
-	for (uint32_t i = 0; i < NUM_THREADS; i++)
-	{
-		threads.push_back( thread(helloWorld) );
-	}
+  // Create threads:
+  for (uint32_t i = 0; i < NUM_THREADS; i++)
+  {
+    threads.push_back( thread(helloWorld) );
+  }
 
-	// Say something from main thread:
-	cout << "Main thread " << this_thread::get_id() << " calling in!" << endl;
+  // Say something from main thread:
+  cout << "Main thread " << this_thread::get_id() << " calling in!" << endl;
 
-	// Join threads with main thread:
-	for(auto& thread : threads)
-	{
-		thread.join();
-	}
+  // Join threads with main thread:
+  for(auto& thread : threads)
+  {
+    thread.join();
+  }
 
-	// Output final counter value:
-	cout << "Final counter value (should be " << MAX_COUNT << "): " << counter.getCount() << endl;
+  // Output final counter value:
+  cout << "Final counter value (should be " << MAX_COUNT << "): " << counter.getCount() << endl;
 
-	// Exit status:
-	return 0;
+  // Exit status:
+  return 0;
 
 }
 
@@ -90,11 +90,11 @@ int main()
 void helloWorld()
 {
 
-	cout << "Thread " << this_thread::get_id() << " calling in!" << endl;
+  cout << "Thread " << this_thread::get_id() << " calling in!" << endl;
 
-	for (uint32_t i = 0; i < (MAX_COUNT/NUM_THREADS); ++i)
-	{
-		counter.increment();
-	}
+  for (uint32_t i = 0; i < (MAX_COUNT/NUM_THREADS); ++i)
+  {
+    counter.increment();
+  }
 
 }

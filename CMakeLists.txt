@@ -1,7 +1,7 @@
 ########################################
 ########################################
 ##
-##	Copyright (C) 2014 Korovasoft, Inc.
+##  Copyright (C) 2014 Korovasoft, Inc.
 ##
 ##  File:
 ##      \file CMakeLists.txt
@@ -30,55 +30,55 @@ project(Concurrent-GARTH)
 #
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 
-	# Check version. If empty, warn. If too old, error out:
-	if ("${CMAKE_CXX_COMPILER_VERSION}" STREQUAL "")
-		message(WARNING "GCC Compiler version is unknown, proceed at your own risk!")
-	elseif (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
-		message(FATAL_ERROR "GCC compiler version must be at least 4.8!")
-	endif()
+  # Check version. If empty, warn. If too old, error out:
+  if ("${CMAKE_CXX_COMPILER_VERSION}" STREQUAL "")
+    message(WARNING "GCC Compiler version is unknown, proceed at your own risk!")
+  elseif (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.8)
+    message(FATAL_ERROR "GCC compiler version must be at least 4.8!")
+  endif()
 
-	# Set compiler specific variables:
-	set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=c++11 -pthread -Wl,--no-as-needed")
+  # Set compiler specific variables:
+  set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=c++11 -pthread -Wl,--no-as-needed")
 
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 
-	# Check version. If empty, warn. If too old, error out:
-	if ("${CMAKE_CXX_COMPILER_VERSION}" STREQUAL "")
-		message(WARNING "Clang compiler version is unknown, proceed at your own risk!")
-	elseif (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 3.2)
-		message(FATAL_ERROR "Clang compiler version must be at least 3.2!")
-	endif()
+  # Check version. If empty, warn. If too old, error out:
+  if ("${CMAKE_CXX_COMPILER_VERSION}" STREQUAL "")
+    message(WARNING "Clang compiler version is unknown, proceed at your own risk!")
+  elseif (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 3.2)
+    message(FATAL_ERROR "Clang compiler version must be at least 3.2!")
+  endif()
 
-	# Set compiler specific variables:
-	set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=c++11 -pthread")
+  # Set compiler specific variables:
+  set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=c++11 -pthread")
 
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 
-	# Check version. If empty, warn. If too old, error out:
-	if ("${CMAKE_CXX_COMPILER_VERSION}" STREQUAL "")
-		message(WARNING "MSVC compiler version is unknown, proceed at your own risk!")
-	elseif (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 18.0)
-		message(FATAL_ERROR "MSVC compiler version must be at least 18.0!")
-	endif()
+  # Check version. If empty, warn. If too old, error out:
+  if ("${CMAKE_CXX_COMPILER_VERSION}" STREQUAL "")
+    message(WARNING "MSVC compiler version is unknown, proceed at your own risk!")
+  elseif (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 18.0)
+    message(FATAL_ERROR "MSVC compiler version must be at least 18.0!")
+  endif()
 
-	# Set compiler specific variables:
-	set(CMAKE_CXX_FLAGS "")
+  # Set compiler specific variables:
+  set(CMAKE_CXX_FLAGS "")
 
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
 
-	# Check version. If empty, warn. If too old, error out:
-	if ("${CMAKE_CXX_COMPILER_VERSION}" STREQUAL "")
-		message(WARNING "Intel compiler version is unknown, proceed at your own risk!")
-	elseif (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 14.0)
-		message(FATAL_ERROR "MSVC compiler version must be at least 14.0!")
-	endif()
+  # Check version. If empty, warn. If too old, error out:
+  if ("${CMAKE_CXX_COMPILER_VERSION}" STREQUAL "")
+    message(WARNING "Intel compiler version is unknown, proceed at your own risk!")
+  elseif (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 14.0)
+    message(FATAL_ERROR "MSVC compiler version must be at least 14.0!")
+  endif()
 
-	# Set compiler specific variables:
-	set(CMAKE_CXX_FLAGS "")
+  # Set compiler specific variables:
+  set(CMAKE_CXX_FLAGS "")
 
 else()
 
-	message(WARNING "The '${CMAKE_CXX_COMPILER_ID}' compiler is untested and unsupported, continue at your own risk!")
+  message(WARNING "The '${CMAKE_CXX_COMPILER_ID}' compiler is untested and unsupported, continue at your own risk!")
 
 endif()
 

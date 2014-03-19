@@ -1,7 +1,7 @@
 ////////////////////////////////////////
 ////////////////////////////////////////
 //
-//	Copyright (C) 2014 Korovasoft, Inc.
+//  Copyright (C) 2014 Korovasoft, Inc.
 //
 //  File:
 //      \file Garth.h
@@ -37,17 +37,17 @@
 namespace Garth
 {
 
-	/// GarthEngine class
-	class GarthEngine
-	{
-		private:
-			char status;
+  /// GarthEngine class
+  class GarthEngine
+  {
+    private:
+      char status;
 
-		public:
-			void start();
-			void pause();
-			void stop();
-	};
+    public:
+      void start();
+      void pause();
+      void stop();
+  };
 
 } // Garth namespace
 

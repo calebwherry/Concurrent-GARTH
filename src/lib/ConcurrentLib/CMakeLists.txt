@@ -1,7 +1,7 @@
 ########################################
 ########################################
 ##
-##	Copyright (C) 2014 Korovasoft, Inc.
+##  Copyright (C) 2014 Korovasoft, Inc.
 ##
 ##  File:
 ##      \file CMakeLists.txt

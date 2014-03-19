@@ -1,7 +1,7 @@
 ////////////////////////////////////////
 ////////////////////////////////////////
 //
-//	Copyright (C) 2014 Korovasoft, Inc.
+//  Copyright (C) 2014 Korovasoft, Inc.
 //
 //  File:
 //      \file Garth.cpp
@@ -32,8 +32,8 @@
 namespace Garth
 {
 
-	void GarthEngine::start() {};
-	void GarthEngine::pause() {};
-	void GarthEngine::stop() {};
+  void GarthEngine::start() {};
+  void GarthEngine::pause() {};
+  void GarthEngine::stop() {};
 
 } // Garth namespace

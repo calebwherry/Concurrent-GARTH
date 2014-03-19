@@ -146,10 +146,10 @@ def main():
   # Argument parsing:
   #
   parser = argparse.ArgumentParser()
-  parser.add_argument("-i", "--install-prefix", help="Prefix for the install directory.", type=str, default="")
   parser.add_argument("-c", "--clean", help="Remove all build directories in current working directory matching 'local-build_*' and exit.", action="store_true")
+  parser.add_argument("-i", "--install-prefix", help="Prefix for the install directory.", type=str, default="")
   parser.add_argument("-k", "--keep-build", help="Keep current build directory, do not remove after build completes.", action="store_true")
-  parser.add_argument("-d", "--display-log", help="Display build log to stdout.", action="store_true")
+  parser.add_argument("-l", "--log-display", help="Display build log to stdout.", action="store_true")
   args = parser.parse_args()
 
 
@@ -231,7 +231,7 @@ def main():
     exit(1)
 
   # Display log if cmd argument set:
-  if args.display_log:
+  if args.log_display:
     displayLog(log)
 
   # Close log file:

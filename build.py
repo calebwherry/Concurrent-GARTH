@@ -32,7 +32,7 @@ from colorama import init, Fore
 
 
 #
-# Print logfile to stdout function:
+# Print logfile to stdout - function:
 #
 def displayLog(log):
 

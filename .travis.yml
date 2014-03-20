@@ -20,7 +20,7 @@ language:
 
 compiler:
   - gcc
-  - clang
+#  - clang
 
 before_install:
 
@@ -45,7 +45,8 @@ install:
       export CXX="g++-4.8" CC="gcc-4.8"; 
     fi
 
-  # Install newest GNU clang compiler:
+  # Install newest clang compiler:
+  # TODO: All this work and it still doesn't work right... Giving up for now...
   - if [ "${CXX}" = "clang++" ]; then
       sudo apt-get install --allow-unauthenticated clang-3.4;
       svn co http://llvm.org/svn/llvm-project/libcxx/trunk libcxx;

@@ -50,7 +50,7 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   endif()
 
   # Set compiler specific variables:
-  set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=c++11 -pthread")
+  set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=gnu++11 -pthread")
 
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 

@@ -20,22 +20,37 @@ language:
 
 compiler:
   - gcc
-#  - clang
+  - clang
 
 before_install:
-  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+
+  # Repo update for g++4.8:
+  - if [ "${CXX}" = "g++" ]; then sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y; fi
+
+  # Repo update for clang++3.4:
+  - if [ "${CXX}" = "clang++" ]; then sudo add-apt-repository -y ppa:h-rayflood/llvm; fi
+
+  # Update repo:
   - sudo apt-get update
 
 install:
 
   # Install newest GNU gcc compiler:
-  - if [ "${CXX}" = "g++" ]; then sudo apt-get install g++-4.8; fi
-  - if [ "${CXX}" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
+  - if [ "${CXX}" = "g++" ]; then 
+      sudo apt-get install g++-4.8;
+      export CXX="g++-4.8" CC="gcc-4.8"; 
+    fi
+
+  # Install newest GNU clang compiler:
+  - if [ "${CXX}" = "clang++" ]; then
+      sudo apt-get install --allow-unauthenticated clang-3.4;
+      export CXX="clang++-3.4" CC="clang-3.4";
+    fi
 
   # Install GoogleTest testing framework:
   - sudo apt-get install libgtest-dev python3 python-pip
 
-  # Install doxygen without all those lame depends like latex:
+  # Install doxygen without all those lame depends that are HUGE (<cough> LATEX):
   - sudo apt-get --no-install-recommends install doxygen
 
   # Install python modules:

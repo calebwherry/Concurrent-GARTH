@@ -45,8 +45,8 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   # Check version. If empty, warn. If too old, error out:
   if ("${CMAKE_CXX_COMPILER_VERSION}" STREQUAL "")
     message(WARNING "Clang compiler version is unknown, proceed at your own risk!")
-  elseif (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 3.2)
-    message(FATAL_ERROR "Clang compiler version must be at least 3.2!")
+  elseif (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 3.4)
+    message(FATAL_ERROR "Clang compiler version must be at least 3.4!")
   endif()
 
   # Set compiler specific variables:

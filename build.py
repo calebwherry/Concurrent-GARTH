@@ -116,9 +116,39 @@ def unixBuild(log):
 def windowsBuild(log):
   print('Starting Windows build...')
   
-  # Run msbuild:
+  # Run msbuild - ALL_BUILD:
   print("\tRunning 'msbuild'... ", end='')
   returnCode = subprocess.call(["msbuild", "ALL_BUILD.vcxproj"], stdout=log, stderr=subprocess.STDOUT)
+  
+  if returnCode != 0:
+    print(Fore.RED + 'ERROR!!! Please see log file for details: ' + log.name)
+    displayLog(log)
+    exit(1)
+  print(Fore.GREEN + 'done!')
+  
+  # Run msbuild - RUN_TESTS:
+  print("\tRunning 'msbuild RUN_TESTS'... ", end='')
+  returnCode = subprocess.call(["msbuild", "RUN_TESTS.vcxproj"], stdout=log, stderr=subprocess.STDOUT)
+  
+  if returnCode != 0:
+    print(Fore.RED + 'ERROR!!! Please see log file for details: ' + log.name)
+    displayLog(log)
+    exit(1)
+  print(Fore.GREEN + 'done!')
+  
+  # Run msbuild - ZERO_CHECK:
+  print("\tRunning 'msbuild ZERO_CHECK'... ", end='')
+  returnCode = subprocess.call(["msbuild", "ZERO_CHECK.vcxproj"], stdout=log, stderr=subprocess.STDOUT)
+  
+  if returnCode != 0:
+    print(Fore.RED + 'ERROR!!! Please see log file for details: ' + log.name)
+    displayLog(log)
+    exit(1)
+  print(Fore.GREEN + 'done!')
+  
+  # Run msbuild - INSTALL:
+  print("\tRunning 'msbuild INSTALL'... ", end='')
+  returnCode = subprocess.call(["msbuild", "INSTALL.vcxproj"], stdout=log, stderr=subprocess.STDOUT)
   
   if returnCode != 0:
     print(Fore.RED + 'ERROR!!! Please see log file for details: ' + log.name)

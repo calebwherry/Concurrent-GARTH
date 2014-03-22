@@ -30,6 +30,10 @@
 
 
 // Compiler includes:
+#include <string>
+
+
+// Namespaces:
 ////
 
 
@@ -37,16 +41,60 @@
 namespace Garth
 {
 
-  /// GarthEngine class
-  class GarthEngine
+  // Zoo Statuses:
+  enum ZooStatus
+  {
+    UNKNOWN,
+    OPEN,
+    SUSPENDED,
+    RESUMED,
+    CLOSED
+  };
+
+
+  /// Zoo class
+  class Zoo
   {
     private:
-      char status;
+      ZooStatus status;
 
     public:
-      void start();
-      void pause();
-      void stop();
+
+      /// Default constructor
+      Zoo ();
+
+      /// Custom constructor
+      Zoo (
+        ZooStatus _status
+      );
+
+      void open();
+      void suspend();
+      void resume();
+      void close();
+  };
+
+
+  /// Zoo Keeper class
+  class ZooKeeper
+  {
+    private:
+      std::string name;
+
+    public:
+
+      /// Default constructor
+      ZooKeeper();
+
+      /// Custom constructor
+      ZooKeeper (
+        const std::string& name
+      );
+
+      void openZoo();
+      void suspendZoo();
+      void resumeZoo();
+      void closeZoo();
   };
 
 } // Garth namespace

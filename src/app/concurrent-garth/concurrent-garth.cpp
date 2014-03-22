@@ -46,10 +46,14 @@ CO::ConcurrentCounter counter(MAX_COUNT);
 int main()
 {
 
-  // Test GarthLib:
-  GarthEngine engine;
-  engine.start();
-  engine.stop();
+  // GarthLib objs:
+  Zoo zoo;
+  ZooKeeper zooKeeper("Fred");
+
+  // GarthLib Actions:
+  zooKeeper.openZoo();
+  zooKeeper.closeZoo();
+  zoo.close();
 
 
   // Get number of cores available:

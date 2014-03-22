@@ -32,7 +32,13 @@ from colorama import init, Fore
 
 
 #
-# Print logfile to stdout - function:
+# Bad globals but... oh well, don't want to pass startTime everywhere:
+#
+startTime = time()
+
+
+#
+# Print log to stdout:
 #
 def displayLog(log):
 
@@ -55,123 +61,84 @@ def displayLog(log):
 
 
 #
-# Build function: Unix
+# Execute system call:
 #
-def unixBuild(log):
+def sysCall(cmds, log, pad="\t"):
 
-  print('Starting UNIX build...')
-
-  # Run make:
-  print("\tRunning 'make'... ", end='')
-  returnCode = subprocess.call(["make"], stdout=log, stderr=subprocess.STDOUT)
+  # Print command and run:
+  print(pad + "Running '" + " ".join(cmds) + "'...", end=' ')
+  returnCode = subprocess.call(cmds, stdout=log, stderr=subprocess.STDOUT)
   
   if returnCode != 0:
     print(Fore.RED + 'ERROR!!! Please see log file for details: ' + log.name)
     displayLog(log)
-    exit(1)
+    completeScript(1)
   print(Fore.GREEN + 'done!')
 
 
-  # Run make test:
-  print("\tRunning 'make test'... ", end='')
-  returnCode = subprocess.call(["make", "test"], stdout=log, stderr=subprocess.STDOUT)
 
-  if returnCode != 0:
-    print(Fore.RED + 'ERROR!!! Please see log file for details: ' + log.name)
-    displayLog(log)
-    exit(1)
-  print(Fore.GREEN + 'done!')
+#
+# Complete script:
+#
+def completeScript(exitCode=0):
 
+  # Elapsed time:
+  endTime = time()
+  elapsedTime = endTime - startTime
 
-  # Run make doc:
-  print("\tRunning 'make doc'... ", end='')
-  returnCode = subprocess.call(["make", "doc"], stdout=log, stderr=subprocess.STDOUT)
+  # Display build script execution time:
+  print(Fore.MAGENTA + 'Build script executed in {:d} minutes and {:.4f} seconds!'.format(int(elapsedTime/60), elapsedTime%60) )
+  print('')
 
-  if returnCode != 0:
-    print(Fore.RED + 'ERROR!!! Please see log file for details: ' + log.name)
-    displayLog(log)
-    exit(1)
-  print(Fore.GREEN + 'done!')
+  # Exit:
+  exit(exitCode)
 
 
-  # Run make install:
-  print("\tRunning 'make install'... ", end='')
-  returnCode = subprocess.call(["make", "install"], stdout=log, stderr=subprocess.STDOUT)
 
-  if returnCode != 0:
-    print(Fore.RED + 'ERROR!!! Please see log file for details: ' + log.name)
-    displayLog(log)
-    exit(1)
-  print(Fore.GREEN + 'done!')
+#
+# UNIX build:
+#
+def unixBuild(log):
 
-  # End of unix build:
+  print('')
+  print('UNIX build starting...')
+
+  # Execute build commands:
+  sysCall(["make"], log)
+  sysCall(["make", "test"], log)
+  sysCall(["make", "doc"], log)
+  sysCall(["make", "install"], log)
+
   print('UNIX build complete!')
   print('')
 
 
 
 #
-# Build function: Windows
+# Windows build:
 #
 def windowsBuild(log):
-  print('Starting Windows build...')
-  
-  # Run msbuild - ALL_BUILD:
-  print("\tRunning 'msbuild'... ", end='')
-  returnCode = subprocess.call(["msbuild", "ALL_BUILD.vcxproj"], stdout=log, stderr=subprocess.STDOUT)
-  
-  if returnCode != 0:
-    print(Fore.RED + 'ERROR!!! Please see log file for details: ' + log.name)
-    displayLog(log)
-    exit(1)
-  print(Fore.GREEN + 'done!')
-  
-  # Run msbuild - RUN_TESTS:
-  print("\tRunning 'msbuild RUN_TESTS'... ", end='')
-  returnCode = subprocess.call(["msbuild", "RUN_TESTS.vcxproj"], stdout=log, stderr=subprocess.STDOUT)
-  
-  if returnCode != 0:
-    print(Fore.RED + 'ERROR!!! Please see log file for details: ' + log.name)
-    displayLog(log)
-    exit(1)
-  print(Fore.GREEN + 'done!')
-  
-  # Run msbuild - ZERO_CHECK:
-  print("\tRunning 'msbuild ZERO_CHECK'... ", end='')
-  returnCode = subprocess.call(["msbuild", "ZERO_CHECK.vcxproj"], stdout=log, stderr=subprocess.STDOUT)
-  
-  if returnCode != 0:
-    print(Fore.RED + 'ERROR!!! Please see log file for details: ' + log.name)
-    displayLog(log)
-    exit(1)
-  print(Fore.GREEN + 'done!')
-  
-  # Run msbuild - INSTALL:
-  print("\tRunning 'msbuild INSTALL'... ", end='')
-  returnCode = subprocess.call(["msbuild", "INSTALL.vcxproj"], stdout=log, stderr=subprocess.STDOUT)
-  
-  if returnCode != 0:
-    print(Fore.RED + 'ERROR!!! Please see log file for details: ' + log.name)
-    displayLog(log)
-    exit(1)
-  print(Fore.GREEN + 'done!')
 
-  # End of windows build:
+  print('')
+  print('Windows build starting...')
+  
+  # Execute build commands:
+  sysCall(["msbuild", "ALL_BUILD.vcxproj"], log)
+  sysCall(["msbuild", "RUN_TESTS.vcxproj"], log)
+  sysCall(["msbuild", "ZERO_CHECK.vcxproj"], log)
+  sysCall(["msbuild", "INSTALL.vcxproj"], log)
+
   print('Windows build complete!')
   print('')
+
 
 
 #
 # Main function:
 #
-def main():
+if __name__ == "__main__":
 
-  #
-  # Start time for script:
-  #
-  startTime = time()
-
-
+  
   #
   # Argument parsing:
   #
@@ -181,6 +148,12 @@ def main():
   parser.add_argument("-k", "--keep-build", help="Keep current build directory, do not remove after build completes.", action="store_true")
   parser.add_argument("-l", "--log-display", help="Display build log to stdout.", action="store_true")
   args = parser.parse_args()
+
+
+  #
+  # Init colorama:
+  #
+  init(autoreset=True)
 
 
   #
@@ -197,13 +170,15 @@ def main():
   # Clean build directories if clean specified:
   #
   if args.clean:
-    print("Removing all build directories matching 'local-build_*'... ", end='')
+    print("Removing all build directories matching 'local-build_*':")
     buildDirs = glob('local-build_*')
     buildDirs = filter(path.isdir, buildDirs)
-    for dir in buildDirs: rmtree(dir)
+    for dir in buildDirs:
+      print(Fore.RED + "\t" + dir)
+      rmtree(dir)
     print(Fore.GREEN + 'done!')
     print('')
-    exit(0)
+    completeScript()
 
 
   # Get timestamp:
@@ -213,8 +188,13 @@ def main():
   currentPath = path.abspath(getcwd())
 
   # Get script path:
-  # TODO: This SHOULD be cross-platform but some people say it isn't because of the argv... 
-  # I have yet to come across a situation where this fails so I'm leaving it.
+  # NOTE: 
+  #   This SHOULD be cross-platform but some people say it isn't because of 
+  #   the argv... I have yet to come across a situation where this fails so 
+  #   I'm leaving it. I believe when it fails is if you have this in a module 
+  #   therefore there is no argv define. However, in this case, this script 
+  #   will always be run from the commnad line so we should not run into any 
+  #   issues.
   scriptPath = path.abspath(path.dirname(argv[0]))
 
   # Get OS:
@@ -240,25 +220,17 @@ def main():
   logFile = path.join(buildRoot, 'build.log')
   log = open(logFile, 'w');
 
-  # On all platforms, we at least have to run cmake first to get build files built:
-  print("Running 'cmake'... ", end='')
-  returnCode = subprocess.call(["cmake", scriptPath, "-DCMAKE_INSTALL_PREFIX=" + installDir], stdout=log, stderr=subprocess.STDOUT)
+  # On all platforms, we at least have to run cmake first to get build files:
+  sysCall(["cmake", scriptPath, "-DCMAKE_INSTALL_PREFIX=" + installDir], log, "")
 
-  if returnCode != 0:
-    print(Fore.RED + 'ERROR!!! Please see log file for details: ' + log.name)
-    displayLog(log)
-    exit(1)
-  print(Fore.GREEN + 'done!')
-  print('')
-
-  # Run build based on platform from this point on:
+  # Execute build based on platform from this point on:
   if localOS == 'Linux' or localOS == 'Darwin':
     unixBuild(log)
   elif localOS == 'Windows':
     windowsBuild(log)
   else:
     print(Fore.RED + '**ERROR**: OS platform "' + localOS + '" not recognized; aborting!')
-    exit(1)
+    completeScript(1)
 
   # Display log if cmd argument set:
   if args.log_display:
@@ -270,32 +242,13 @@ def main():
   # Remove build directory if everything up till now has not exited and keep build flag not set:
   chdir(scriptPath)
   if not args.keep_build:
-    print('Removing current build directory (-k, --keep-build to disable)... ', end='')
+    print('Removing current build directory (-k, --keep-build to disable)...', end=' ')
     rmtree(buildRoot)
     print(Fore.GREEN + 'done!')
     print('')
-  
-  # End execution time:
-  endTime = time()
-
-  # Display build script execution time:
-  print(Fore.MAGENTA + 'Build script executed in %g seconds!' % (endTime - startTime))
-  print('')
-
-
-#
-# Main:
-#
-if __name__ == "__main__":
-
-
+ 
+ 
   #
-  # Init colorama:
+  # Exit cleanly
   #
-  init(autoreset=True)
-
-
-  #
-  # Call main function:
-  #
-  main()
+  completeScript()

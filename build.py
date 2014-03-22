@@ -32,7 +32,7 @@ from colorama import init, Fore
 
 
 #
-# Bad globals but... oh well, don't want to pass startTime everywhere:
+# Global start time:
 #
 startTime = time()
 
@@ -43,9 +43,9 @@ startTime = time()
 def displayLog(log):
 
   print('')
-  print(Fore.CYAN + '#############################')
-  print(Fore.CYAN + 'Dumping log file: ' + log.name)
-  print(Fore.CYAN + '#############################')
+  print(Fore.MAGENTA + '#############################')
+  print(Fore.MAGENTA + 'Dumping log file: ' + log.name)
+  print(Fore.MAGENTA + '#############################')
   print('')
 
   # Open file and print it to stdout:
@@ -53,9 +53,9 @@ def displayLog(log):
     print(fin.read())
 
   print('')
-  print(Fore.CYAN + '#############################')
-  print(Fore.CYAN + 'End log dump.')
-  print(Fore.CYAN + '#############################')
+  print(Fore.MAGENTA + '#############################')
+  print(Fore.MAGENTA + 'End log dump.')
+  print(Fore.MAGENTA + '#############################')
   print('')
 
 
@@ -70,7 +70,7 @@ def sysCall(cmds, log, pad="\t"):
   returnCode = subprocess.call(cmds, stdout=log, stderr=subprocess.STDOUT)
   
   if returnCode != 0:
-    print(Fore.RED + 'ERROR!!! Please see log file for details: ' + log.name)
+    print(Fore.RED + 'ERROR!!! Please see log output below!')
     displayLog(log)
     completeScript(1)
   print(Fore.GREEN + 'done!')
@@ -86,8 +86,14 @@ def completeScript(exitCode=0):
   endTime = time()
   elapsedTime = endTime - startTime
 
+  # Exit message color based on exitCode:
+  if exitCode == 0: 
+    colorPrefix = Fore.GREEN
+  else: 
+    colorPrefix = Fore.RED
+
   # Display build script execution time:
-  print(Fore.MAGENTA + 'Build script executed in {:d} minutes and {:.4f} seconds!'.format(int(elapsedTime/60), elapsedTime%60) )
+  print(colorPrefix + 'Build script executed in {:d} minutes and {:.4f} seconds with exit code {:d}!'.format(int(elapsedTime/60), elapsedTime%60, exitCode) )
   print('')
 
   # Exit:
@@ -160,9 +166,9 @@ if __name__ == "__main__":
   # Build script init output:
   #
   print('')
-  print(Fore.MAGENTA + '######################')
-  print(Fore.MAGENTA + 'Automated Build Script')
-  print(Fore.MAGENTA + '######################')
+  print(Fore.GREEN + '######################')
+  print(Fore.GREEN + 'Automated Build Script')
+  print(Fore.GREEN + '######################')
   print('')
 
 

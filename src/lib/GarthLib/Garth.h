@@ -88,7 +88,7 @@ namespace Garth
 
       /// Custom constructor
       ZooKeeper (
-        const std::string& name
+        const std::string& _name
       );
 
       void openZoo();

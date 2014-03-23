@@ -227,7 +227,7 @@ if __name__ == "__main__":
   log = open(logFile, 'w');
 
   # On all platforms, we at least have to run cmake first to get build files:
-  sysCall(["cmake", scriptPath, "-DCMAKE_INSTALL_PREFIX=" + installDir], log, "")
+  sysCall(["cmake", scriptPath, "-DCMAKE_INSTALL_PREFIX='" + installDir + "'"], log, "")
 
   # Execute build based on platform from this point on:
   if localOS == 'Linux' or localOS == 'Darwin':

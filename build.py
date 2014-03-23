@@ -18,17 +18,12 @@
 
 
 #
-# Imports:
+# Global imports:
 #
-import argparse, subprocess
-from os import path, getcwd, mkdir, chdir
-from sys import exit, argv
-from platform import system
+import subprocess
 from time import time
-from datetime import datetime
-from shutil import rmtree
-from glob import glob
 from colorama import init, Fore
+from sys import exit
 
 
 #
@@ -85,15 +80,19 @@ def completeScript(exitCode=0):
   # Elapsed time:
   endTime = time()
   elapsedTime = endTime - startTime
+  totalHours = int(elapsedTime / 3600)
+  totalMinutes = int(elapsedTime / 60)
+  totalSeconds = elapsedTime % 60
 
-  # Exit message color based on exitCode:
-  if exitCode == 0: 
-    colorPrefix = Fore.GREEN
-  else: 
-    colorPrefix = Fore.RED
+  # Display execution time:
+  print('Execution time: {:d} hours, {:d} minutes, and {:.4f} seconds.'.format(totalHours, totalMinutes, totalSeconds) )
+  print('')
 
-  # Display build script execution time:
-  print(colorPrefix + 'Build script executed in {:d} minutes and {:.4f} seconds with exit code {:d}!'.format(int(elapsedTime/60), elapsedTime%60, exitCode) )
+  # Build script completion output:
+  if exitCode == 0:
+    print(Fore.GREEN + 'Build completed successfully: {:d}.'.format(exitCode))
+  else:
+    print(Fore.RED + 'Build completed UNsuccessfully: {:d}.'.format(exitCode))
   print('')
 
   # Exit:
@@ -144,7 +143,15 @@ def windowsBuild(log):
 #
 if __name__ == "__main__":
 
-  
+  # Imports:
+  import argparse
+  from sys import argv
+  from os import path, getcwd, mkdir, chdir
+  from platform import system
+  from datetime import datetime
+  from shutil import rmtree
+  from glob import glob
+
   #
   # Argument parsing:
   #

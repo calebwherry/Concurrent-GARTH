@@ -22,11 +22,11 @@
 
 
 // Forward declarations:
-////
+//
 
 
 // Local includes:
-////
+//
 
 
 // Compiler includes:
@@ -34,21 +34,21 @@
 
 
 // Namespaces:
-////
+//
 
 
 /// Garth namespace
 namespace Garth
 {
 
-  // Zoo Statuses:
+  /// Zoo Statuses
   enum ZooStatus
   {
-    UNKNOWN,
-    OPEN,
-    SUSPENDED,
-    RESUMED,
-    CLOSED
+    UNKNOWN,    ///< Unknown status
+    OPEN,       ///< Open status
+    SUSPENDED,  ///< Suspended status
+    RESUMED,    ///< Resumed status
+    CLOSED      ///< Closed status
   };
 
 
@@ -56,7 +56,8 @@ namespace Garth
   class Zoo
   {
     private:
-      ZooStatus status;
+
+      ZooStatus status;   ///< Status of Zoo
 
     public:
 

@@ -16,45 +16,69 @@
 ////////////////////////////////////////
 
 
-/// Local Includes:
+// Local Includes:
 ////
 
-/// Compiler Includes:
+// Compiler Includes:
 #include <ConcurrentUtil.h>
 #include <ConcurrentObjects.h>
 #include <Garth.h>
 #include <thread>
 #include <vector>
 #include <iostream>
+#include <memory>
+//#include <mpi.h>
 
-/// Namespaces:
+// Namespaces:
 using namespace std;
 using namespace Garth;
 namespace CU = ConcurrentUtil;
 namespace CO = ConcurrentObjects;
 
-/// Function specs:
+// Function specs:
 void helloWorld();
 
-/// Global vars/objs:
+// Global vars/objs:
 uint32_t MAX_COUNT = 100000000,
          NUM_THREADS;
 CO::ConcurrentCounter counter(MAX_COUNT);
 
 
-/// Main:
-int main()
+// Main:
+int main(int argc, char* argv[])
 {
 
-  // GarthLib objs:
-  Zoo zoo;
-  ZooKeeper zooKeeper("Fred");
+  // Create unique Zoo & ZooKeeper for entire simulation:
+  unique_ptr<Zoo> zoo(new Zoo("Galapagos Zoo"));
+  unique_ptr<ZooKeeper> zooKeeper(new ZooKeeper("Darwin"));
 
-  // GarthLib Actions:
-  zooKeeper.openZoo();
-  zooKeeper.closeZoo();
-  zoo.close();
+  // Assign Zoo to ZooKeeper:
+  zooKeeper->assignZoo(move(zoo));
 
+  // Go through the motions of a typical Zoo day:
+  zooKeeper->openZoo();
+  zooKeeper->suspendZoo();
+  zooKeeper->resumeZoo();
+  zooKeeper->closeZoo();
+
+
+  //
+  // Lets try some MPI stuff:
+  //
+  /*
+  int rank, size;
+ 
+  MPI_Init (&argc, &argv);
+  MPI_Comm_rank (MPI_COMM_WORLD, &rank);
+  MPI_Comm_size (MPI_COMM_WORLD, &size);
+  printf( "Hello world from process %d of %d\n", rank, size );
+  MPI_Finalize();
+  */
+
+
+  //
+  // Lets try some Threading stuff:
+  //
 
   // Get number of cores available:
   // TOD0: This should probably have a -1 since main runs in its own thread...

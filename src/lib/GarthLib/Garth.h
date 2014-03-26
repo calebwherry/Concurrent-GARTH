@@ -31,6 +31,7 @@
 
 // Compiler includes:
 #include <string>
+#include <memory>
 
 
 // Namespaces:
@@ -57,16 +58,18 @@ namespace Garth
   {
     private:
 
+      std::string name;   ///< Zoo name
       ZooStatus status;   ///< Status of Zoo
 
     public:
 
       /// Default constructor
-      Zoo ();
+      Zoo();
 
       /// Custom constructor
       Zoo (
-        ZooStatus _status
+        const std::string& name_,
+        ZooStatus status_ = OPEN
       );
 
       void open();
@@ -80,7 +83,9 @@ namespace Garth
   class ZooKeeper
   {
     private:
+
       std::string name;
+      std::unique_ptr<Zoo> zoo;
 
     public:
 
@@ -89,7 +94,11 @@ namespace Garth
 
       /// Custom constructor
       ZooKeeper (
-        const std::string& _name
+        const std::string& name_
+      );
+
+      void assignZoo (
+        std::unique_ptr<Zoo> zoo_
       );
 
       void openZoo();
@@ -97,6 +106,29 @@ namespace Garth
       void resumeZoo();
       void closeZoo();
   };
+
+  
+  /// Organism class
+  class Organism
+  {
+    private:
+
+      std::string name;
+      double fitness;
+
+    public:
+
+      /// Default constructor
+      Organism();
+
+      /// Custom constructor
+      Organism (
+        const std::string& name_,
+        double fitness_ = 0.0
+      );
+
+  };
+
 
 } // Garth namespace
 

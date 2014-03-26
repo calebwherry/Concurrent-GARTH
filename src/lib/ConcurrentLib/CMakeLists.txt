@@ -26,5 +26,4 @@ add_library(ConcurrentLib STATIC ConcurrentUtil.cpp ConcurrentObjects.cpp)
 # Add library headers and archive files to install:
 #
 install(TARGETS ConcurrentLib DESTINATION lib)
-install(FILES ConcurrentUtil.h DESTINATION include)
-install(FILES ConcurrentObjects.h DESTINATION include)
+install(FILES ConcurrentUtil.h ConcurrentObjects.h DESTINATION include/garth)

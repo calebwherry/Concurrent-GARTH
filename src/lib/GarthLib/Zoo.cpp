@@ -4,10 +4,10 @@
 //  Copyright (C) 2014 Korovasoft, Inc.
 //
 //  File:
-//      \file Garth.cpp
+//      \file Zoo.cpp
 //
 //  Description:
-//      \brief Garth Library implementaion.
+//      \brief Garth Library: Zoo implementaion.
 //
 //  Author:
 //      \author J. Caleb Wherry
@@ -21,7 +21,7 @@
 
 
 // Local includes:
-#include "Garth.h"
+#include "Zoo.h"
 
 
 // Compiler includes:
@@ -82,75 +82,6 @@ namespace Garth
     status = CLOSED;
 
     cout << "Zoo::close(): " << name << " has been closed!" << endl;
-  };
-
-
-  //
-  // ZooKeeper implementations:
-  //
-
-  // Default constructor:
-  ZooKeeper::ZooKeeper():
-    name(string(""))
-  {
-  };
-
-  // Custom constructor:
-  ZooKeeper::ZooKeeper(const string& name_):
-    name(name_)
-  {
-    cout << "ZooKeeper::ZooKeeper(): ZooKeeper " << name << " created!" << endl;
-  };
-
-  // assignZoo method:
-  void ZooKeeper::assignZoo(unique_ptr<Zoo> zoo_)
-  {
-    zoo = std::move(zoo_);
-
-    cout << "ZooKeeper::assignZoo(): ZooKeeper " << name << " has been hired!" << endl;
-  };
-
-  // openZoo method:
-  void ZooKeeper::openZoo()
-  {
-    zoo->open();
-  };
-
-  // suspendZoo method:
-  void ZooKeeper::suspendZoo()
-  {
-    zoo->suspend();
-  };
-
-  // resumeZoo method:
-  void ZooKeeper::resumeZoo()
-  {
-    zoo->resume();
-  };
-
-  // closeZoo method:
-  void ZooKeeper::closeZoo()
-  {
-    zoo->close();
-  };
-
-
-  //
-  // Organism implementation:
-  //
-
-  // Default constructor:
-  Organism::Organism():
-    name(string("")),
-    fitness(0.0)
-  {
-  };
-
-  // Custom constructor:
-  Organism::Organism(const string& name_, double fitness_):
-    name(name_),
-    fitness(fitness_)
-  {
   };
 
 

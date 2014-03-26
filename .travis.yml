@@ -61,7 +61,7 @@ install:
     fi
 
   # Install GoogleTest testing framework:
-  - sudo apt-get install libgtest-dev python3 python-pip
+  - sudo apt-get install libgtest-dev python3 python-pip libcr-dev mpich2 mpich2-doc
 
   # Install doxygen without all those lame depends that are HUGE (<cough> LATEX):
   - sudo apt-get --no-install-recommends install doxygen

@@ -4,10 +4,10 @@
 //  Copyright (C) 2014 Korovasoft, Inc.
 //
 //  File:
-//      \file Garth.h
+//      \file Zoo.h
 //
 //  Description:
-//      \brief Garth Library header.
+//      \brief Garth Library: Zoo header.
 //
 //  Author:
 //      \author J. Caleb Wherry
@@ -17,8 +17,8 @@
 
 
 // Include guards:
-#ifndef GARTH_H
-#define GARTH_H
+#ifndef GARTH_ZOO_H
+#define GARTH_ZOO_H
 
 
 // Forward declarations:
@@ -56,6 +56,7 @@ namespace Garth
   /// Zoo class
   class Zoo
   {
+
     private:
 
       std::string name;   ///< Zoo name
@@ -76,56 +77,6 @@ namespace Garth
       void suspend();
       void resume();
       void close();
-  };
-
-
-  /// Zoo Keeper class
-  class ZooKeeper
-  {
-    private:
-
-      std::string name;
-      std::unique_ptr<Zoo> zoo;
-
-    public:
-
-      /// Default constructor
-      ZooKeeper();
-
-      /// Custom constructor
-      ZooKeeper (
-        const std::string& name_
-      );
-
-      void assignZoo (
-        std::unique_ptr<Zoo> zoo_
-      );
-
-      void openZoo();
-      void suspendZoo();
-      void resumeZoo();
-      void closeZoo();
-  };
-
-  
-  /// Organism class
-  class Organism
-  {
-    private:
-
-      std::string name;
-      double fitness;
-
-    public:
-
-      /// Default constructor
-      Organism();
-
-      /// Custom constructor
-      Organism (
-        const std::string& name_,
-        double fitness_ = 0.0
-      );
 
   };
 
@@ -133,4 +84,4 @@ namespace Garth
 } // Garth namespace
 
 
-#endif // GARTH_H
+#endif // GARTH_ZOO_H

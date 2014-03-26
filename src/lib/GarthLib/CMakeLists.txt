@@ -19,11 +19,11 @@
 #
 # Create a static library:
 #
-add_library(GarthLib STATIC Zoo.cpp ZooKeeper.cpp Organism.cpp)
+add_library(GarthLib STATIC Garth.cpp)
 
 
 #
 # Add library headers and archive files to install:
 #
 install(TARGETS GarthLib DESTINATION lib)
-install(FILES Zoo.h ZooKeeper.h Organism.h DESTINATION include)
+install(FILES Garth.h DESTINATION include)

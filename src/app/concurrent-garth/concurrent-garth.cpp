@@ -22,9 +22,7 @@
 // Compiler Includes:
 #include <ConcurrentUtil.h>
 #include <ConcurrentObjects.h>
-#include <Zoo.h>
-#include <ZooKeeper.h>
-#include <Organism.h>
+#include <Garth.h>
 #include <thread>
 #include <vector>
 #include <iostream>

@@ -26,20 +26,22 @@ include_directories(${PROJECT_LIB_DIR}/ConcurrentLib)
 #
 # MPI Library:
 #
-find_package(MPI REQUIRED) 
-include_directories(${MPI_INCLUDE_PATH})
+#find_package(MPI REQUIRED) 
+#include_directories(${MPI_INCLUDE_PATH})
 
 
 #
 # Add executables:
 #
-add_executable(concurrent-garth concurrent-garth.cpp ${MPI_LIBRARIES})
+add_executable(concurrent-garth concurrent-garth.cpp)
+#add_executable(concurrent-garth concurrent-garth.cpp ${MPI_LIBRARIES})
 
 
 #
 # Link libraries:
 #
-target_link_libraries(concurrent-garth ConcurrentLib GarthLib mpi)
+target_link_libraries(concurrent-garth ConcurrentLib GarthLib)
+#target_link_libraries(concurrent-garth ConcurrentLib GarthLib mpi)
 
 
 #

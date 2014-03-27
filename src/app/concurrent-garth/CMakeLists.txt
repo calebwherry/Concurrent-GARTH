@@ -19,8 +19,10 @@
 #
 # Add include directories for local libraries:
 #
-include_directories(${PROJECT_LIB_DIR}/GarthLib)
-include_directories(${PROJECT_LIB_DIR}/ConcurrentLib)
+include_directories(
+  ${PROJECT_LIB_DIR}/GarthLib 
+  ${PROJECT_LIB_DIR}/ConcurrentLib
+)
 
 
 #

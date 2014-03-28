@@ -110,7 +110,7 @@ dist:
 # Clean target:
 clean:
 	@printf "[Cleaning] Build... "
-	@rm -rf ${CPROGS} ${CXXPROGS} ${LOGFILE} *.o *.aux *.bbl *.blg *.log *to.pdf *.dat *.eps *.ps *.bfile *.dSYM
+	@rm -rf ${CPROGS} ${CXXPROGS} ${LOGFILE} *.o *.aux *.bbl *.blg *.out *.log *to.pdf *.dat *.eps *.ps *.bfile *.dSYM
 	@printf "done.\n"
 
 # Clean all target:

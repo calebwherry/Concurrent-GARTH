@@ -99,7 +99,6 @@ set(PROJECT_DOC_DIR "${PROJECT_ROOT_DIR}/doc")
 # Testing:
 #
 include( CTest )
-ENABLE_TESTING()
 
 #
 # Add subdirectories:

@@ -32,15 +32,43 @@
 // Compiler includes:
 #include <memory>
 #include <string>
+#include <ConcurrentObjects.h>
 
 
 // Namespaces:
-//
+namespace CO = ConcurrentObjects;
 
 
 /// Garth namespace
 namespace Garth
 {
+
+  /// Organism class
+  class Organism
+  {
+
+    private:
+
+      std::string name;
+      std::vector<double> genome;
+      double fitness;
+
+    public:
+
+      /// Default constructor
+      Organism();
+
+      /// Custom constructor
+      Organism (
+        const std::string& name_,
+        double fitness_ = 0.0
+      );
+
+  };
+
+
+  /// Population typedef (new syntax)
+  using Population = CO::ConcurrentVector<Organism>;
 
 
   /// Zoo Statuses
@@ -60,8 +88,9 @@ namespace Garth
 
     private:
 
-      std::string name;   ///< Zoo name
-      ZooStatus status;   ///< Status of Zoo
+      std::string name;       ///< Zoo name
+      ZooStatus status;       ///< Status of Zoo
+      Population population;  ///< Zoo Organism population
 
     public:
 
@@ -80,7 +109,6 @@ namespace Garth
       void close();
 
   };
-
 
 
   /// ZooKeeper class
@@ -110,30 +138,7 @@ namespace Garth
       void resumeZoo();
       void closeZoo();
 
-  };  
-
-
-
-  /// Organism class
-  class Organism
-  {
-    private:
-
-      std::string name;
-      double fitness;
-
-    public:
-
-      /// Default constructor
-      Organism();
-
-      /// Custom constructor
-      Organism (
-        const std::string& name_,
-        double fitness_ = 0.0
-      );
-
-  };
+  }; 
 
 
 } // Garth namespace

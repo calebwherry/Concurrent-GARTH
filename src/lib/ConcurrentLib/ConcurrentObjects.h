@@ -123,6 +123,34 @@ namespace ConcurrentObjects
   {
   }
 
+  // operator[]
+  template <typename T>
+  T ConcurrentVector<T>::operator[] (
+    uint32_t index
+  )
+  {
+    return data[index];
+  }
+
+  // push_back
+  template <typename T>
+  void ConcurrentVector<T>::push_back (
+    T element
+  )
+  {
+    std::lock_guard<std::mutex> lk(dataMutex);
+    data.push_back(element);
+  }
+
+  // pop_back
+  template <typename T>
+  T ConcurrentVector<T>::pop_back ()
+  {
+    std::lock_guard<std::mutex> lk(dataMutex);
+    data.pop_back();
+  }
+
+
 } // ConcurrentObjects namespace
 
 

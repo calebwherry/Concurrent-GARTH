@@ -61,6 +61,8 @@ int main(int argc, char* argv[])
   zooKeeper->resumeZoo();
   zooKeeper->closeZoo();
 
+  // Create population:
+  unique_ptr<Population> population(new Population(500));
 
   //
   // Lets try some MPI stuff:

@@ -17,6 +17,14 @@
 
 
 #
+# Include directories:
+#
+include_directories(
+  ${PROJECT_LIB_DIR}/ConcurrentLib
+)
+
+
+#
 # Create a static library:
 #
 add_library(GarthLib STATIC Garth.cpp)

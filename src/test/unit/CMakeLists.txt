@@ -36,22 +36,35 @@ enable_testing()
 #
 # Add executables:
 #
-add_executable(GarthLib-tests GarthLib-tests.cpp)
+add_executable(GarthLib-Garth-tests GarthLib-Garth-tests.cpp)
+add_executable(ConcurrentLib-ConcurrentObjects-tests ConcurrentLib-ConcurrentObjects-tests.cpp)
+add_executable(ConcurrentLib-ConcurrentUtil-tests ConcurrentLib-ConcurrentUtil-tests.cpp)
 
 
 #
 # Link libraries:
 #
-target_link_libraries(GarthLib-tests GarthLib ${GTEST_BOTH_LIBRARIES} pthread)
+target_link_libraries(GarthLib-Garth-tests GarthLib ${GTEST_BOTH_LIBRARIES} pthread)
+target_link_libraries(ConcurrentLib-ConcurrentObjects-tests ConcurrentLib ${GTEST_BOTH_LIBRARIES} pthread)
+target_link_libraries(ConcurrentLib-ConcurrentUtil-tests ConcurrentLib ${GTEST_BOTH_LIBRARIES} pthread)
 
 
 #
 # Add as test:
 #
-add_test(GarthLib-tests GarthLib-tests)
+add_test(GarthLib-Garth-tests GarthLib-Garth-tests)
+add_test(ConcurrentLib-ConcurrentObjects-tests ConcurrentLib-ConcurrentObjects-tests)
+add_test(ConcurrentLib-ConcurrentUtil-tests ConcurrentLib-ConcurrentUtil-tests)
 
 
 #
 # Specify install directory:
 #
-install(TARGETS GarthLib-tests DESTINATION test)
+install(
+  TARGETS 
+    GarthLib-Garth-tests
+    ConcurrentLib-ConcurrentObjects-tests
+    ConcurrentLib-ConcurrentUtil-tests
+  DESTINATION 
+    test
+)

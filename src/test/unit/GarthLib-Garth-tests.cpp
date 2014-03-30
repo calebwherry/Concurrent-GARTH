@@ -4,10 +4,10 @@
 //  Copyright (C) 2014 Korovasoft, Inc.
 //
 //  File:
-//      \file GarthLib-tests.cpp
+//      \file GarthLib-Garth-tests.cpp
 //
 //  Description:
-//      \brief Concurrent-GARTH: GarthLib tests
+//      \brief Concurrent-GARTH: GarthLib::Garth tests
 //
 //  Author:
 //      \author J. Caleb Wherry
@@ -27,7 +27,7 @@
 using namespace std;
 using namespace Garth;
 
-TEST (Objects, Construtors)
+TEST (Garth, Construtors)
 {
 
   EXPECT_NO_THROW({

@@ -5,7 +5,7 @@
 
 Concurrent GARTH (Genetic AlgoRiTHms) using C++: A Framework for Concurrent GAs.
 
-Continuous integration is implemented on this repository using [Travis-CI](https://travis-ci.org/).
+Continuous Integration is being run using [Travis-CI](https://travis-ci.org/).
 
 ## Dependencies
 

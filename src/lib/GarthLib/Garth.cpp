@@ -37,6 +37,38 @@ namespace Garth
 {
 
 
+  //
+  // Organism implementation:
+  //
+
+  // Default constructor:
+  Organism::Organism():
+    name(string("")),
+    fitness(0.0)
+  {
+    // Nothing to do.
+  };
+
+  // Custom constructor:
+  Organism::Organism(const string& name_, double fitness_):
+    name(name_),
+    fitness(fitness_)
+  {
+    // Nothing to do.
+  };
+
+  // Destructor
+  Organism::~Organism()
+  {
+    // Nothing to do.
+  }
+
+  // Mutate
+  void Organism::mutate()
+  {
+    // Nothing to do.
+  }
+
 
   //  
   // Zoo implementations:
@@ -134,26 +166,6 @@ namespace Garth
   void ZooKeeper::closeZoo()
   {
     zoo->close();
-  };
-
-
-
-  //
-  // Organism implementation:
-  //
-
-  // Default constructor:
-  Organism::Organism():
-    name(string("")),
-    fitness(0.0)
-  {
-  };
-
-  // Custom constructor:
-  Organism::Organism(const string& name_, double fitness_):
-    name(name_),
-    fitness(fitness_)
-  {
   };
 
 

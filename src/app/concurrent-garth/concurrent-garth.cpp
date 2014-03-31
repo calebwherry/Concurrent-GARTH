@@ -43,6 +43,26 @@ uint32_t MAX_COUNT = 100000000,
          NUM_THREADS;
 CO::ConcurrentCounter counter(MAX_COUNT);
 
+// Derived class:
+class MyOrganism : public Organism
+{
+
+  public:
+
+    // Constructor
+    MyOrganism() {}
+
+    // Destructor
+    ~MyOrganism() {}
+
+    // Mutate function:
+    void mutate()
+    {
+      cout << "Mutating..." << endl;
+    }
+
+};
+
 
 // Main:
 int main(int argc, char* argv[])

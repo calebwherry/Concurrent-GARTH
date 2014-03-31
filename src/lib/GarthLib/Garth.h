@@ -64,6 +64,12 @@ namespace Garth
         double fitness_ = 0.0
       );
 
+      /// Destructor
+      virtual ~Organism();
+
+      /// Mutate method
+      virtual void mutate();
+
   };
 
 

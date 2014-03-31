@@ -47,7 +47,7 @@ namespace Garth
   class Organism
   {
 
-    private:
+    protected:
 
       std::string name;
       std::vector<double> genome;

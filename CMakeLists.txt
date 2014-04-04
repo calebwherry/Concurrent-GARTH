@@ -38,6 +38,7 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   endif()
 
   # Set compiler specific variables depending on architecture:
+  message("System processor: ${CMAKE_SYSTEM_PROCESSOR}")
   if ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "i386")
     set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=c++11 -pthread")
   else ()

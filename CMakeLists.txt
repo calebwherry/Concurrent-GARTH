@@ -37,8 +37,12 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     message(FATAL_ERROR "GCC compiler version must be at least 4.8!")
   endif()
 
-  # Set compiler specific variables:
-  set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=c++11 -pthread -Wl,--no-as-needed")
+  # Set compiler specific variables depending on architecture:
+  if ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "i386")
+    set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=c++11 -pthread")
+  else ()
+    set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=c++11 -pthread -Wl,--no-as-needed")
+  endif()
 
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
 

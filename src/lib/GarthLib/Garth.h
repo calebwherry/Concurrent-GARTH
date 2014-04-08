@@ -51,6 +51,7 @@ namespace Garth
 
       std::string name;
       std::vector<double> genome;
+      uint32_t numGenes;
       double fitness;
 
     public:

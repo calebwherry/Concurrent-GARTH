@@ -44,6 +44,8 @@ namespace Garth
   // Default constructor:
   Organism::Organism():
     name(string("")),
+    genome(),
+    numGenes(0),
     fitness(0.0)
   {
     // Nothing to do.
@@ -52,6 +54,8 @@ namespace Garth
   // Custom constructor:
   Organism::Organism(const string& name_, double fitness_):
     name(name_),
+    genome(),
+    numGenes(0),
     fitness(fitness_)
   {
     // Nothing to do.

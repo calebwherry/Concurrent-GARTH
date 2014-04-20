@@ -27,7 +27,6 @@
 #include <vector>
 #include <iostream>
 #include <memory>
-//#include <mpi.h>
 
 // Namespaces:
 using namespace std;
@@ -68,37 +67,47 @@ class MyOrganism : public Organism
 int main(int argc, char* argv[])
 {
 
-  // Create unique Zoo & ZooKeeper for entire simulation:
-  unique_ptr<Zoo> zoo(new Zoo("Galapagos Zoo"));
-  unique_ptr<ZooKeeper> zooKeeper(new ZooKeeper("Darwin"));
+  // Genetic Algorithm Constraints:
+  uint32_t generationCount = 0;
 
-  // Assign Zoo to ZooKeeper:
-  zooKeeper->assignZoo(move(zoo));
 
-  // Go through the motions of a typical Zoo day:
+  // Create shared Zoo & ZooKeeper for simulation:
+  shared_ptr<Zoo> zoo(new Zoo("Galapagos Zoo"));
+
+  // Set initial conditions for Zoo:
+  zoo->setMaxGenerations(10000);
+  zoo->setNumberHabitats(1);  // Eventually will be MPI influenced...
+  zoo->setNumberTrainers( CU::getNumberCores() );
+
+
+  // Create new ZooKepper:
+  shared_ptr<ZooKeeper> zooKeeper(new ZooKeeper("Darwin", zoo) );
+
+  // Set intial conditions for zooKeeper:
+  zooKeeper->initializePopulation();
+
+  // Open the zoo (start the simulation):
   zooKeeper->openZoo();
-  zooKeeper->suspendZoo();
-  zooKeeper->resumeZoo();
+
+
+  // Create simulation loop:
+  while ( (generationCount <= zoo->getMaxGenerations()) && 
+          !zooKeeper->populationConverged()
+        )
+  {
+
+    cout << "Generation: " << generationCount << endl;
+
+    // Increase generation number:
+    generationCount++;
+
+  }
+
+
+  // Close the zoo (finsih the simulation):
   zooKeeper->closeZoo();
 
-  // Create population:
-  unique_ptr<Population> population(new Population(500));
-
-
-  //
-  // Lets try some MPI stuff:
-  //
-  /*
-  int rank, size;
- 
-  MPI_Init (&argc, &argv);
-  MPI_Comm_rank (MPI_COMM_WORLD, &rank);
-  MPI_Comm_size (MPI_COMM_WORLD, &size);
-  printf( "Hello world from process %d of %d\n", rank, size );
-  MPI_Finalize();
-  */
-
-
+  
   //
   // Lets try some Threading stuff:
   //

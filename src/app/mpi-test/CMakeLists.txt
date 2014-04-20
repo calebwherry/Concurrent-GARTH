@@ -1,0 +1,50 @@
+########################################
+########################################
+##
+##  Copyright (C) 2014 Korovasoft, Inc.
+##
+##  File:
+##      \file CMakeLists.txt
+##
+##  Description:
+##      \brief App-level CMakeLists.txt
+##
+##  Author:
+##      \author J. Caleb Wherry
+##
+########################################
+########################################
+
+
+#
+# Add include directories for local libraries:
+#
+include_directories(
+  ${PROJECT_LIB_DIR}/GarthLib 
+  ${PROJECT_LIB_DIR}/ConcurrentLib
+)
+
+
+#
+# MPI Library:
+#
+find_package(MPI REQUIRED) 
+include_directories(${MPI_INCLUDE_PATH})
+
+
+#
+# Add executables:
+#
+add_executable(mpi-test mpi-test.cpp ${MPI_LIBRARIES})
+
+
+#
+# Link libraries:
+#
+target_link_libraries(mpi-test ConcurrentLib GarthLib mpi)
+
+
+#
+# Specify install directory:
+#
+install(TARGETS mpi-test DESTINATION bin)

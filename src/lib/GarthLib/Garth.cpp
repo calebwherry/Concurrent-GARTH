@@ -122,6 +122,35 @@ namespace Garth
     cout << "Zoo::close(): " << name << " has been closed!" << endl;
   };
 
+  uint32_t Zoo::getMaxGenerations()
+  {
+    return maxGenerations;
+  };
+
+  uint32_t Zoo::getNumberHabitats()
+  {
+    return numberHabitats;
+  };
+
+  uint32_t Zoo::getNumberTrainers()
+  {
+    return numberTrainers;
+  };
+
+  void Zoo::setMaxGenerations(uint32_t maxGenerations_)
+  {
+    maxGenerations = maxGenerations_;
+  };
+
+  void Zoo::setNumberHabitats(uint32_t numberHabitats_)
+  {
+    numberHabitats = numberHabitats_;
+  };
+
+  void Zoo::setNumberTrainers(uint32_t numberTrainers_)
+  {
+    numberTrainers = numberTrainers_;
+  };
 
 
   //  
@@ -130,22 +159,17 @@ namespace Garth
 
   // Default constructor:
   ZooKeeper::ZooKeeper():
-    name(string(""))
+    name(string("")),
+    zoo(shared_ptr<Zoo>())
   {
   };  
 
   // Custom constructor:
-  ZooKeeper::ZooKeeper(const string& name_):
-    name(name_)
+  ZooKeeper::ZooKeeper(const string& name_, shared_ptr<Zoo> zoo_):
+    name(name_),
+    zoo(zoo_)
   {
-    cout << "ZooKeeper::ZooKeeper(): ZooKeeper " << name << " created!" << endl;  };
-
-  // assignZoo method:
-  void ZooKeeper::assignZoo(unique_ptr<Zoo> zoo_)
-  {
-    zoo = std::move(zoo_);
-
-    cout << "ZooKeeper::assignZoo(): ZooKeeper " << name << " has been hired!" << endl; 
+    cout << "ZooKeeper::ZooKeeper(): ZooKeeper " << name << " created!" << endl;  
   };
 
   // openZoo method:
@@ -204,6 +228,36 @@ namespace Garth
     return make_shared<Organism>();
   };
 
+
+
+  //
+  // Habitat implementation:
+  //
+
+  // Default constructor:
+  Habitat::Habitat():
+    name(string("")),
+    numberTrainers(0)
+  {
+  };
+
+  // Custom constructor:
+  Habitat::Habitat(uint32_t numberTrainers_):
+    numberTrainers(numberTrainers_)
+  {
+  };
+
+  // Get num trainers method:
+  uint32_t Habitat::getNumberTrainers()
+  {
+    return numberTrainers;
+  };
+
+  // Set num trainers:
+  void Habitat::setNumberTrainers(uint32_t numberTrainers_)
+  {
+    numberTrainers = numberTrainers_;
+  };
 
 
   //

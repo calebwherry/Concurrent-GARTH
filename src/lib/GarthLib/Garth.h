@@ -73,9 +73,39 @@ namespace Garth
 
   };
 
-
   /// Population typedef (new syntax)
   using Population = CO::ConcurrentVector<Organism>;
+
+
+  /// Habitat class
+  class Habitat
+  {
+
+    private:
+
+      std::string name;
+      uint32_t numberTrainers;
+
+    public:
+
+      /// Default constructor
+      Habitat();
+
+      /// Custom constructor
+      Habitat (
+        uint32_t numberTrainers
+      );
+
+      /// Get number of trainers:
+      uint32_t getNumberTrainers();
+
+      /// Set number of trainers:
+      void setNumberTrainers(uint32_t numberTrainers);
+
+  };
+
+  /// Habitat typedef
+  using Habitats = std::vector<Habitat>;
 
 
   /// Zoo Statuses
@@ -97,12 +127,13 @@ namespace Garth
 
     private:
 
-      std::string name;       ///< Zoo name
-      ZooStatus status;       ///< Status of Zoo
-
-    protected:
-
-      Population population;  ///< Zoo Organism population
+      std::string name;         ///< Zoo name
+      ZooStatus status;         ///< Status of Zoo
+      Population population;    ///< Zoo Organism population
+      Habitats habitats;        ///< Zoo habitats
+      uint32_t numberHabitats;  ///< Number of habitats
+      uint32_t maxGenerations;  ///< Max number of generations
+      uint32_t numberTrainers;  ///< Number of trainers
 
     public:
 
@@ -115,10 +146,31 @@ namespace Garth
         ZooStatus status_ = OPEN
       );
 
+      // Zoo operations:
       void open();
       void suspend();
       void resume();
       void close();
+
+      // Get methods:
+      uint32_t getMaxGenerations();
+      uint32_t getNumberHabitats();
+      uint32_t getNumberTrainers();
+
+      // Set Max Generations
+      void setMaxGenerations (
+        uint32_t maxGenerations_
+      );
+
+      // Set Number of Habitats
+      void setNumberHabitats (
+        uint32_t numberHabitats_
+      );
+
+      // Set Number Trainers
+      void setNumberTrainers (
+        uint32_t numberHabitats
+      );
 
   };
 
@@ -130,7 +182,7 @@ namespace Garth
     private:
 
       std::string name;
-      std::unique_ptr<Zoo> zoo;
+      std::shared_ptr<Zoo> zoo;
 
     public:
 
@@ -139,11 +191,8 @@ namespace Garth
 
       /// Custom constructor
       ZooKeeper (
-        const std::string& name_
-      );  
-
-      void assignZoo (
-        std::unique_ptr<Zoo> zoo_
+        const std::string& name_,
+        std::shared_ptr<Zoo> zoo_
       );  
 
       // Zoo operations:

@@ -30,7 +30,7 @@
 
 
 // Compiler includes:
-#include<cstdint>
+#include<stdint.h>
 
 
 /// ConcurrentUtil namespace

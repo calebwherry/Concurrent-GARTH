@@ -75,7 +75,7 @@ namespace Garth
 
 
   //  
-  // Zoo implementations:
+  // Zoo implementation:
   //  
 
   // Default constructor:
@@ -125,7 +125,7 @@ namespace Garth
 
 
   //  
-  // ZooKeeper implementations:
+  // ZooKeeper implementation:
   //  
 
   // Default constructor:
@@ -170,6 +170,68 @@ namespace Garth
   void ZooKeeper::closeZoo()
   {
     zoo->close();
+  };
+
+  // initializePopulation method:
+  void ZooKeeper::initializePopulation()
+  {
+  };
+
+  // shufflePopulation method:
+  void ZooKeeper::shufflePopulation()
+  {
+  };
+
+  // rankPopulation method:
+  void ZooKeeper::rankPopulation()
+  {
+  };
+
+  // mutatePopulation method:
+  void ZooKeeper::mutatePopulation()
+  {
+  };
+
+  // populationConverged method:
+  bool ZooKeeper::populationConverged()
+  {
+    return false;
+  };
+
+  // getOptimalOrgnism method:
+  shared_ptr<Organism> ZooKeeper::getOptimalOrganism()
+  {
+    return make_shared<Organism>();
+  };
+
+
+
+  //
+  // Trainer implementation:
+  //
+
+  // Default constructor:
+  Trainer::Trainer():
+    name(string(""))
+  {
+  };  
+
+  // Custom constructor:
+  Trainer::Trainer(const string& name_):
+    name(name_)
+  {
+  };
+
+  // Set name:
+  void Trainer::setName(const string& name_)
+  {
+    name = name_;
+  };
+
+  // Get name:
+  string Trainer::getName()
+  {
+    return name;
   };
 
 

@@ -93,10 +93,15 @@ namespace Garth
   class Zoo
   {
 
+    friend class ZooKeeper;
+
     private:
 
       std::string name;       ///< Zoo name
       ZooStatus status;       ///< Status of Zoo
+
+    protected:
+
       Population population;  ///< Zoo Organism population
 
     public:
@@ -121,6 +126,7 @@ namespace Garth
   /// ZooKeeper class
   class ZooKeeper
   {
+
     private:
 
       std::string name;
@@ -140,12 +146,52 @@ namespace Garth
         std::unique_ptr<Zoo> zoo_
       );  
 
+      // Zoo operations:
       void openZoo();
       void suspendZoo();
       void resumeZoo();
       void closeZoo();
 
-  }; 
+      // Population operations:
+      void initializePopulation();
+      void shufflePopulation();
+      void rankPopulation();
+      void mutatePopulation();
+      bool populationConverged();
+
+      // Organism operations:
+      std::shared_ptr<Organism> getOptimalOrganism();
+
+  };
+
+
+  /// Trainer class
+  class Trainer
+  {
+    
+    private:
+
+      std::string name;
+
+    public:
+
+      /// Default constructor
+      Trainer();
+
+      /// Custom constructor
+      Trainer (
+        const std::string& name_
+      );
+
+      /// Set name
+      void setName (
+        const std::string& name_
+      );
+
+      /// Get name
+      std::string getName();
+
+  };
 
 
 } // Garth namespace

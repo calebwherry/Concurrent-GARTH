@@ -20,4 +20,4 @@
 # Add subdirectories:
 #
 add_subdirectory(concurrent-garth)
-#add_subdirectory(mpi-test)
+add_subdirectory(mpi-test)

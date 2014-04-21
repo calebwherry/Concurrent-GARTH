@@ -36,13 +36,13 @@ set(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} ${MPI_LINK_FLAGS}")
 #
 # Add executables:
 #
-add_executable(mpi-test mpi-test.cpp ${MPI_LIBRARIES})
+add_executable(mpi-test mpi-test.cpp)
 
 
 #
 # Link libraries:
 #
-target_link_libraries(mpi-test ConcurrentLib GarthLib mpi)
+target_link_libraries(mpi-test ConcurrentLib GarthLib ${MPI_LIBRARIES})
 
 
 #

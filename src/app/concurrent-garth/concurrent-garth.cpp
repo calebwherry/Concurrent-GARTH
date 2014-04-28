@@ -72,7 +72,7 @@ int main(int argc, char* argv[])
 
 
   // Create shared Zoo & ZooKeeper for simulation:
-  shared_ptr<Zoo> zoo(new Zoo("Galapagos Zoo"));
+  shared_ptr<Zoo> zoo( make_shared<Zoo>("Galapagos Zoo") );
 
   // Set initial conditions for Zoo:
   zoo->setMaxGenerations(10000);
@@ -81,7 +81,7 @@ int main(int argc, char* argv[])
 
 
   // Create new ZooKepper:
-  shared_ptr<ZooKeeper> zooKeeper(new ZooKeeper("Darwin", zoo) );
+  shared_ptr<ZooKeeper> zooKeeper( make_shared<ZooKeeper>("Darwin", zoo) );
 
   // Set intial conditions for zooKeeper:
   zooKeeper->initializePopulation();
@@ -104,7 +104,7 @@ int main(int argc, char* argv[])
   }
 
 
-  // Close the zoo (finsih the simulation):
+  // Close the zoo (finish the simulation):
   zooKeeper->closeZoo();
 
   

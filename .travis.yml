@@ -15,9 +15,6 @@
 ########################################
 ########################################
 
-python:
-  - "3.2"
-
 language: 
   - cpp
 
@@ -51,8 +48,8 @@ install:
       export CXX="clang++-3.2" CC="clang-3.2";
     fi
 
-  # Install GoogleTest testing framework:
-  - sudo apt-get install libgtest-dev libcr-dev mpich2 mpich2-doc
+  # Main apt-get installs:
+  - sudo apt-get install libgtest-dev python3 python-pip libcr-dev mpich2 mpich2-doc
 
   # Install doxygen without all those lame depends that are HUGE (<cough> LATEX):
   - sudo apt-get --no-install-recommends install doxygen
@@ -64,6 +61,11 @@ before_script:
 
   # Correctly install GoogleTest static libraries:
   - cd /usr/src/gtest; sudo cmake CMakeLists.txt; sudo make; sudo cp *.a /usr/lib; cd -
+
+  # Put installed colorama package in correct place for new python version. This is extremely sloppy and nasty but 
+  #  it is the quickest way I could it to work on Travis:
+  - sudo mkdir /usr/local/lib/python3.2/dist-packages/colorama/
+  - sudo cp /usr/local/lib/python2.7/dist-packages/colorama/* /usr/local/lib/python3.2/dist-packages/colorama/
 
 script:
   - "./build.py"

@@ -51,7 +51,7 @@ install:
       sudo apt-get install --allow-unauthenticated clang-3.4;
       export CXX="clang++-3.4" CC="clang-3.4";
 
-      # Install stdc++ for clang:
+      # Install stdc++ for clang++:
       cwd=$(pwd);
       svn co --quiet http://llvm.org/svn/llvm-project/libcxx/trunk@181765 libcxx;
       cd libcxx/lib && bash buildit;

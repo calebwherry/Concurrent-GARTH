@@ -27,15 +27,11 @@ compiler:
 
 before_install:
 
-  # Repo update for g++4.8:
-  - if [ "${CXX}" = "g++" ]; then 
-      sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y;
-    fi
+  # Repo updates for g++4.8:
+  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y;
 
-  # Repo update for clang++3.4:
-  - if [ "${CXX}" = "clang++" ]; then 
-      sudo add-apt-repository -y ppa:h-rayflood/llvm;
-    fi
+  # Repo updates for clang++-3.2:
+  - sudo add-apt-repository -y ppa:h-rayflood/llvm;
 
   # Update repo:
   - sudo apt-get update

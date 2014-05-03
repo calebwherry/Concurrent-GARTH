@@ -185,7 +185,17 @@ In all of the approaches above, the worker threads were created and destroyed af
 %
 \section{Genetic Algorithm Model}
 
-...
+For this framework, a new model was created for GAs. There is a typical nomenclature that is used in GAs that I feel is sometimes misleading and confusing. So, I decided to come up with my nomenclature and show that here.
+
+The main object in my GA model is the concept of a Zoo. The Zoo contains everything and is the begin and end of the simulation. A Zoo also has one and only one ZooKeeper. This ZooKeeper controls everything that goes on in the Zoo from opening it, closing it, dealing with organisms, etc. Everything is mediated by the ZooKeeper.
+
+For each CPU present on the machine, there is a matching Habitat. This habitat contains the data needed to process its section of the population. Since I am not using MPI yet (see Future Work), there is only 1 Habitat for my experiments. Habitats in the future will be monitored and synced by the ZooKeeper.
+
+For each Habitat, we have Trainers. Trainers are analogous to threads (or Workers). They are the powerhouse of the operation and perform all of the mating, selection, and mutation. In its current state, the software creates and destroys Trainers after each generation. This is extremely costly and will hopefully be remedied by using ThreadPools in the future.
+
+Each Trainer works on their section of the population using the lock-free data structure I mentioned above. It does its work until the entire population is processed and then destroyed.
+
+As of now, convergence is not tested and there is a set number for max generations allowed. This stems from the fast the testing for convergence is in no way an easy task and was implemented in this phase of the project.
 
 
 %
@@ -193,7 +203,17 @@ In all of the approaches above, the worker threads were created and destroyed af
 %
 \section{Application Area: Quantum Condensed Matter Physics}
 
-...
+The application area I chose to unleash my GA on is that of quantum condensed matter physics and more specifically the Thomson problem. The Thomson problem is what happens with electrons are put on a sphere. By the laws of physics, they want to minimize the electrostatic energy in the given environment. When the number of particles in this system grows, the non-linearity of the problems shows its head. This stems from the fact that there are so many energy levels at which each particle can be at. This is an issue for traditional linear solvers since the search space is so huge.
+
+The Thomson problem can be better identified as minimizing this quantity:
+
+\begin{eqnarray}
+  U = \frac{q^2}{4\pi\epsilon_0} \sum_{i>j=1}^{n_c} \frac{1}{|r_i - r_j|}
+\end{eqnarray}
+
+where the figure in front of the sum is taken to be $1$ for convenience and the $r$ values are the position vectors of the particles. Since we are only dealing with a sphere in our example, $|r|$ itself is always $1$.
+
+In this problem, an organism is taken to be an entire configuration space of the particles, not the individual particles themselves. The GA could have been structured this was but that viewpoint is more towards a classical viewpoint of optimization. The way we formulate the problem is such that we are creating entire solutions and mating, selecting, and mutating them.
 
 
 %
@@ -211,7 +231,11 @@ The second result was supposed to be a performance benchmark between varying num
 %%
 \subsection{Cross-platform and Compilers}
 
-...
+I was highly surprised at the results I got from the different compilers and platforms. In my testing, I compiled my software with 4 compilers: GNU GCC 4.8, Clang 3.4, MSVC 18, and Intel 14. On all of these compilers, I can into no issues at all with the software I wrote. This surprised in that I was sure that there would be some issue along the way. However, the standard holds true between these compilers and my software can be compiled with all 4 compilers. 
+
+I compiled/tested my software in 3 different build environments: Linux (Ubuntu 12.04), Windows (7), and Mac (OS X 10.8). I decided to use Python as my build system since it is readily available on all 3 systems and used cmake to create my actual build files. Since I was using cross-platform features of Python and only native C++11 functions, I ran into no issues while compiling and running any of my software on any of these systems.
+
+Having a standard that is correctly implemented on so many different compilers is an amazing thing to me. I can write my software on one system and not have to worry about it compiling/executing on another. This is a major selling point for a GA framework and I hope moving forward that it will help in promoting this software package for us on different systems.
 
 
 %%
@@ -219,7 +243,11 @@ The second result was supposed to be a performance benchmark between varying num
 %%
 \subsection{Concurrency Performance}
 
-...
+I was unable to get to a true performance analysis based on varying the number of threads since the construction of the GA framework, learning of new C++11 standards, and implementation of the application area took up so much time. However, I was able to at least run the example application a few times to a rough average of the number of generations it took to reach an optimal organism.
+
+For the given application area of quantum condensed matter physics with 4 worker threads, I was able to obtain an optimal solution using 5 particles with a minimal fitness (cost) function around 10,000 generation. This is typical for a small number of particles and varies based on the random mutation, selection, and mating of the organisms.
+
+When the number of particles were increased to 60, the number of generations sky rockets to between 60,000. This is due to the non-linear aspect of this problem and it typical in this type of optimization theory.
 
 
 %
@@ -233,7 +261,17 @@ Another area that I am extremely interested in is not only gaining performance i
 
 The C++11 thread model has a lot of different features and I have only just scratched the surface. I would love to dive deeper into the standard and see what other performance tweaks I would make just by better understanding how to use constructs like weak versus shared pointers. There are memory overheads that go with using these nicer features and understanding them better could potentially lead to drastic.
 
+Given time, work on performing cross-build setups would be an interesting task. This means that the software is not built for the system on which the build happens but targeted at another build environment. This is an extremely hard task but since I am using cmake, it should at least made a little easier.
+
 The last thing I would like to look at encompasses all of the above ideas: for a framework to be beneficial to scientist who work with large data sets, the framework has to be scalable. With threading, you can only scale so high before you lose performance because of swapping of resources. Normally you will only start however many threads that is equal to the number of CPUs/cores you have. Thus, there are not many processors that have over 32 cores. However, when looking at machines that are distributed, there are thousands of processors on those machines. Being able to scale a GA framework up to work on such supercomputers as Titan at ORNL or the BlueGene serious would be a tremendous jump forward into providing non-linear optimization techniques via GAs.
+
+
+%
+% Conclusion
+%
+\section{Conclusion}
+
+GAs are an area of interesting research that can potentially benefit from different parallelisms. A universal framework can be created, as was done here, that uses concurrent data structures to perform research on different scientific ideas using GAs. This type of work can help in extending the reach of GAs into very large search spaces that were intractable in the past. Having this ability can potentially foster new results and help in solving very hard non-linear problems.
 
 
 %

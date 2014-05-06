@@ -64,6 +64,7 @@ vector<vector<double>> configMatrix; // configuration matrix for better plotting
 vector<vector<double>> bestOrganismFitnesses; //best fitness at each population.
 double tol = 1e-8; // Tolerance for convergence of solutions;
 int32_t popCount = 0;
+#define M_PI 3.14159265358979323846
 
 // Main:
 int main(int argc, char* argv[])
@@ -142,6 +143,7 @@ int main(int argc, char* argv[])
 		//
 
 		// Figure file object:
+		/*
 		string figDataFileName = problemPrefix + "_fig1_" + to_string(i+1) + ".dat";
 		ofstream figDataFile;
 		figDataFile.open(figDataFileName.c_str());
@@ -160,10 +162,12 @@ int main(int argc, char* argv[])
 
 		// Close open file handlers:
 		figDataFile.close();
+		*/
 
 	}
 
 	// Figure file object:
+	/*
 	string fig2DataFileName = problemPrefix + "_fig2.dat";
 	ofstream fig2DataFile;
 	fig2DataFile.open(fig2DataFileName.c_str());
@@ -190,6 +194,7 @@ int main(int argc, char* argv[])
 
 	// Close open file handlers:
 	fig2DataFile.close();
+	*/
 
 	return 0;
 }

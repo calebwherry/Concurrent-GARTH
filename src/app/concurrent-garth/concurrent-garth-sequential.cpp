@@ -23,6 +23,8 @@
 #include <math.h>
 #include <string>
 #include <vector>
+#include <chrono>
+#include <thread>
 
 
 // Namespaces:
@@ -47,6 +49,9 @@ double cost(const vector<double>&);
 void sort(vector<double>&, vector<int>&);
 void shuffle(vector<int>&);
 
+void helloWorld()
+{
+}
 
 // Global vars:
 int32_t seed; // RNG seed
@@ -65,6 +70,7 @@ vector<vector<double>> bestOrganismFitnesses; //best fitness at each population.
 double tol = 1e-8; // Tolerance for convergence of solutions;
 int32_t popCount = 0;
 #define M_PI 3.14159265358979323846
+uint32_t NUM_THREADS = 2;
 
 // Main:
 int main(int argc, char* argv[])
@@ -110,6 +116,17 @@ int main(int argc, char* argv[])
 	// Main loop over number of vertices:
 	for (uint32_t i = 0; i<vertices.size(); ++i)
 	{
+		// Start time:
+		auto start_time = chrono::high_resolution_clock::now();
+
+		// Create Threads:
+		vector<thread> threads;
+		for (uint32_t i = 0; i < NUM_THREADS; i++)
+	  {
+			threads.push_back( thread(helloWorld) );
+		}
+
+
 		// Set which problem we are working on:
     nc = vertices[i];
 		nv = 2*nc;
@@ -134,9 +151,22 @@ int main(int argc, char* argv[])
 			bestOrganismFitnesses[popCount-1].push_back(f[0]);
     }
 
+		// Join threads:
+		for (auto& thread : threads)
+		{
+			thread.join();
+		}
+
+		// End time:
+		auto end_time = chrono::high_resolution_clock::now();
+
 		// Print config to screen:
     print();
 
+		// Output timing:
+		cout << "Running time - ";
+		cout << chrono::duration_cast<chrono::seconds>(end_time - start_time).count() << ".";
+		cout << chrono::duration_cast<chrono::microseconds>(end_time - start_time).count() << endl;
 
 		//
 		// Output

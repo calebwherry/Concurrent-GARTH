@@ -24,6 +24,7 @@ import subprocess
 from time import time
 from colorama import init, Fore
 from sys import exit
+from string import whitespace
 
 
 #
@@ -108,14 +109,15 @@ def unixBuild(log):
   print('')
   print('UNIX build starting...')
 
-  # Command to find number of processors:
-  parallelMake = "-j$(cat /proc/cpuinfo | grep processor | wc -l)"
+  # Command to find number of processors (decode output to str then remove all whitespace):
+  numProcs = subprocess.Popen(["cat /proc/cpuinfo | grep processor | wc -l"], shell=True, stdout=subprocess.PIPE).communicate()[0].decode("utf-8")
+  numProcs = "".join(numProcs.split())
 
   # Execute build commands:
-  sysCall(["make", parallelMake], log, shellExec=True)
-  sysCall(["make", "test", parallelMake], log, shellExec=True)
-  sysCall(["make", "doc", parallelMake], log, shellExec=True)
-  sysCall(["make", "install", parallelMake], log, shellExec=True)
+  sysCall(["make", "-j"+numProcs], log, shellExec=True)
+  sysCall(["make", "-j"+numProcs, "test"], log, shellExec=True)
+  sysCall(["make", "-j"+numProcs, "doc"], log, shellExec=True)
+  sysCall(["make", "-j"+numProcs, "install"], log, shellExec=True)
 
   print('UNIX build complete!')
   print('')
@@ -130,9 +132,10 @@ def windowsBuild(log):
   print('')
   print('Windows build starting...')
 
-  # Command to find number of processors:
-  getNumProcs = "echo %NUMBER_OF_PROCESSORS%"
-  
+  # Command to find number of processors (decode output to str then remove all whitespace):
+  numProcs = subprocess.Popen(["echo %NUMBER_OF_PROCESSORS%"], shell=True, stdout=subprocess.PIPE).communicate()[0].decode("utf-8")
+  numProcs = "".join(numProcs.split())
+
   # Execute build commands:
   sysCall(["msbuild", "ALL_BUILD.vcxproj"], log)
   sysCall(["msbuild", "RUN_TESTS.vcxproj"], log)

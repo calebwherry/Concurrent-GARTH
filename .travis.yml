@@ -40,9 +40,9 @@ before_install:
 install:
 
   # Install newest GNU gcc compiler:
-  - if [ "${CXX}" = "g++" ]; then 
+  - if [ "${CXX}" = "g++" ]; then
       sudo apt-get install g++-4.8;
-      export CXX="g++-4.8" CC="gcc-4.8"; 
+      export CXX="g++-4.8" CC="gcc-4.8";
     fi
 
   # Install newest clang compiler:

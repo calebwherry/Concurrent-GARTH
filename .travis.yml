@@ -44,24 +44,24 @@ install:
 #      sudo apt-get install g++-4.8;
 #      export CXX="g++-4.8" CC="gcc-4.8";
 #    fi
-#
-#  # Install newest clang compiler:
-#  # TODO: All this work and it still doesn't work right... Giving up for now...
-#  - if [ "${CXX}" = "clang++" ]; then
-#      sudo apt-get install --allow-unauthenticated clang-3.4;
-#      export CXX="clang++-3.4" CC="clang-3.4";
-#
-#      # Install stdc++ for clang++:
-#      cwd=$(pwd);
-#      svn co --quiet http://llvm.org/svn/llvm-project/libcxx/trunk@181765 libcxx;
-#      cd libcxx/lib && bash buildit;
-#      sudo cp ./libc++.so.1.0 /usr/lib/;
-#      sudo mkdir /usr/include/c++/v1;
-#      cd .. && sudo cp -r include/* /usr/include/c++/v1/;
-#      cd /usr/lib && sudo ln -sf libc++.so.1.0 libc++.so;
-#      sudo ln -sf libc++.so.1.0 libc++.so.1 && cd $cwd;
-#    fi
-#
+
+  # Install newest clang compiler:
+  # TODO: All this work and it still doesn't work right... Giving up for now...
+  - if [ "${CXX}" = "clang++" ]; then
+      sudo apt-get install --allow-unauthenticated clang-3.4;
+      export CXX="clang++-3.4" CC="clang-3.4";
+
+      # Install stdc++ for clang++:
+      cwd=$(pwd);
+      svn co --quiet http://llvm.org/svn/llvm-project/libcxx/trunk@181765 libcxx;
+      cd libcxx/lib && bash buildit;
+      sudo cp ./libc++.so.1.0 /usr/lib/;
+      sudo mkdir /usr/include/c++/v1;
+      cd .. && sudo cp -r include/* /usr/include/c++/v1/;
+      cd /usr/lib && sudo ln -sf libc++.so.1.0 libc++.so;
+      sudo ln -sf libc++.so.1.0 libc++.so.1 && cd $cwd;
+    fi
+
   # Main apt-get installs:
   - sudo apt-get install libgtest-dev python3 python-pip libcr-dev mpich2 mpich2-doc
 

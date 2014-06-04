@@ -58,11 +58,11 @@ def displayLog(log):
 #
 # Execute system call:
 #
-def sysCall(cmds, log, pad="\t"):
+def sysCall(cmds, log, pad="\t", shellExec=False):
 
   # Print command and run:
   print(pad + "Running '" + " ".join(cmds) + "'...", end=' ')
-  returnCode = subprocess.call(cmds, stdout=log, stderr=subprocess.STDOUT)
+  returnCode = subprocess.call(cmds, shell=shellExec, stdout=log, stderr=subprocess.STDOUT)
   
   if returnCode != 0:
     print(Fore.RED + 'ERROR!!! Please see log output below!')
@@ -108,14 +108,14 @@ def unixBuild(log):
   print('')
   print('UNIX build starting...')
 
-	# Command to find number of processors:
-	getNumProcs = "cat /proc/cpuinfo | grep processor | wc -l"
+  # Command to find number of processors:
+  parallelMake = "-j$(cat /proc/cpuinfo | grep processor | wc -l)"
 
   # Execute build commands:
-  sysCall(["make", "-j"+getNumProcs], log)
-  sysCall(["make", "test"], log)
-  sysCall(["make", "doc"], log)
-  sysCall(["make", "install"], log)
+  sysCall(["make", parallelMake], log, shellExec=True)
+  sysCall(["make", "test", parallelMake], log, shellExec=True)
+  sysCall(["make", "doc", parallelMake], log, shellExec=True)
+  sysCall(["make", "install", parallelMake], log, shellExec=True)
 
   print('UNIX build complete!')
   print('')
@@ -129,6 +129,9 @@ def windowsBuild(log):
 
   print('')
   print('Windows build starting...')
+
+  # Command to find number of processors:
+  getNumProcs = "echo %NUMBER_OF_PROCESSORS%"
   
   # Execute build commands:
   sysCall(["msbuild", "ALL_BUILD.vcxproj"], log)

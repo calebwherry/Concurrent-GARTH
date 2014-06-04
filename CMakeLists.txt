@@ -16,13 +16,11 @@
 ########################################
 
 
-
 #
 # CMake version and project name:
 #
 cmake_minimum_required(VERSION 2.6)
 project(Concurrent-GARTH)
-
 
 
 #
@@ -37,12 +35,13 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     message(FATAL_ERROR "GCC compiler version must be at least 4.8!")
   endif()
 
-  # Set compiler specific variables depending on architecture:
+	# Set compiler specific flags:
+	set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=c++11 -pthread")
+
+  # Additional compiler flags depending on architecture:
   message( STATUS "System processor: ${CMAKE_SYSTEM_PROCESSOR}")
   if ("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "(.*)arm(.*)")
-    set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=c++11 -pthread -Wl,--no-as-needed")
-  else ()
-    set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=c++11 -pthread")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,--no-as-needed")
   endif()
 
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
@@ -54,7 +53,7 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
     message(FATAL_ERROR "Clang compiler version must be at least 3.4!")
   endif()
 
-  # Set compiler specific variables:
+  # Set compiler specific flags:
   set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=c++11 -stdlib=libc++ -pthread")
 
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
@@ -66,7 +65,7 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
     message(FATAL_ERROR "MSVC compiler version must be at least 18.0!")
   endif()
 
-  # Set compiler specific variables:
+  # Set compiler specific flags:
   set(CMAKE_CXX_FLAGS "")
 
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
@@ -78,7 +77,7 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
     message(FATAL_ERROR "MSVC compiler version must be at least 14.0!")
   endif()
 
-  # Set compiler specific variables:
+  # Set compiler specific flags:
   set(CMAKE_CXX_FLAGS "")
 
 else()
@@ -86,7 +85,6 @@ else()
   message(WARNING "The '${CMAKE_CXX_COMPILER_ID}' compiler is untested and unsupported, continue at your own risk!")
 
 endif()
-
 
 
 #
@@ -104,6 +102,7 @@ set(PROJECT_DOC_DIR "${PROJECT_ROOT_DIR}/doc")
 # Testing:
 #
 include( CTest )
+
 
 #
 # Add subdirectories:

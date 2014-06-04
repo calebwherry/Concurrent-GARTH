@@ -21,12 +21,13 @@ This are the dependencies needed to use this library with its applications and a
 * Google Test
 * Python3
 * Pip
+* MPI (kind-of, not really used yet)
 
 ### Debian-based Dependency Installation
 
     $ sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
     $ sudo apt-get update
-    $ sudo apt-get install build-essential g++-4.8 cmake libgtest-dev python3 python-pip
+    $ sudo apt-get install build-essential g++-4.8 cmake libgtest-dev python3 python-pip libcr-dev mpich2 mpich2-doc
     $ sudo apt-get --no-install-recommends install doxygen
     $ pip install colorama
     $ cd /usr/src/gtest; sudo cmake CMakeLists.txt; sudo make; sudo cp *.a /usr/lib; cd -

@@ -108,8 +108,11 @@ def unixBuild(log):
   print('')
   print('UNIX build starting...')
 
+	# Command to find number of processors:
+	getNumProcs = "cat /proc/cpuinfo | grep processor | wc -l"
+
   # Execute build commands:
-  sysCall(["make"], log)
+  sysCall(["make", "-j"+getNumProcs], log)
   sysCall(["make", "test"], log)
   sysCall(["make", "doc"], log)
   sysCall(["make", "install"], log)

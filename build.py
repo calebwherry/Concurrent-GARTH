@@ -57,6 +57,29 @@ def displayLog(log):
 
 
 #
+# Verify number of processors:
+#
+def verifyNumProcessors(numProcs):
+
+	# If numProcs is anything but an int greater than 0, hard-code a value of 1:
+	#	NOTE: 
+	#		The try-catch is here in case the numProcs above returns something that
+	#		is not castable to an int. The case I am specicially worried about is if
+	#		something like "4 processors found" is returned. Hopefully this won't 
+	#		happen but in the case that it does I catch and set the default.
+	try:
+		if int(numProcs) < 1:
+			numProcs = "1"
+	except:
+		print(Fore.RED + "\t" + 'WARNING -- Number of processors could not be found, defaulting to 1!')
+		numProcs = "1"
+	
+	# Return (maybe new) number of processors:
+	return numProcs
+
+
+
+#
 # Execute system call:
 #
 def sysCall(cmds, log, pad="\t", shellExec=False):
@@ -118,9 +141,8 @@ def unixBuild(log, args):
     numProcs = subprocess.Popen(["cat /proc/cpuinfo | grep processor | wc -l"], shell=True, stdout=subprocess.PIPE).communicate()[0].decode("utf-8")
     numProcs = "".join(numProcs.split())
 
-  # If numProcs is still zero at this point, hard-code a value of 1
-  if numProcs == "0":
-	  numProcs = "1"
+  # Verify number of processors:
+  numProcs = verifyNumProcessors(numProcs)
 
   # Execute build commands:
   sysCall(["make", "-j"+numProcs], log)
@@ -150,9 +172,8 @@ def windowsBuild(log, args):
     numProcs = subprocess.Popen(["echo %NUMBER_OF_PROCESSORS%"], shell=True, stdout=subprocess.PIPE).communicate()[0].decode("utf-8")
     numProcs = "".join(numProcs.split())
 
-  # If numProcs is still zero at this point, hard-code a value of 1
-  if numProcs == "0":
-    numProcs = "1"
+  # Verify number of processors:
+  numProcs = verifyNumProcessors(numProcs)
 
   # Execute build commands:
   sysCall(["msbuild", "ALL_BUILD.vcxproj"], log)

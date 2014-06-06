@@ -118,6 +118,10 @@ def unixBuild(log, args):
     numProcs = subprocess.Popen(["cat /proc/cpuinfo | grep processor | wc -l"], shell=True, stdout=subprocess.PIPE).communicate()[0].decode("utf-8")
     numProcs = "".join(numProcs.split())
 
+  # If numProcs is still zero at this point, hard-code a value of 1
+  if numProcs == "0":
+	  numProcs = "1"
+
   # Execute build commands:
   sysCall(["make", "-j"+numProcs], log)
   sysCall(["make", "-j"+numProcs, "test"], log)
@@ -145,6 +149,10 @@ def windowsBuild(log, args):
     # Command to find number of processors (decode output to str then remove all whitespace):
     numProcs = subprocess.Popen(["echo %NUMBER_OF_PROCESSORS%"], shell=True, stdout=subprocess.PIPE).communicate()[0].decode("utf-8")
     numProcs = "".join(numProcs.split())
+
+  # If numProcs is still zero at this point, hard-code a value of 1
+  if numProcs == "0":
+    numProcs = "1"
 
   # Execute build commands:
   sysCall(["msbuild", "ALL_BUILD.vcxproj"], log)

@@ -114,10 +114,10 @@ def unixBuild(log):
   numProcs = "".join(numProcs.split())
 
   # Execute build commands:
-  sysCall(["make", "-j"+numProcs], log, shellExec=True)
-  sysCall(["make", "-j"+numProcs, "test"], log, shellExec=True)
-  sysCall(["make", "-j"+numProcs, "doc"], log, shellExec=True)
-  sysCall(["make", "-j"+numProcs, "install"], log, shellExec=True)
+  sysCall(["make", "-j"+numProcs], log)
+  sysCall(["make", "-j"+numProcs, "test"], log)
+  sysCall(["make", "-j"+numProcs, "doc"], log)
+  sysCall(["make", "-j"+numProcs, "install"], log)
 
   print('UNIX build complete!')
   print('')

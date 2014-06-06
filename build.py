@@ -104,14 +104,19 @@ def completeScript(exitCode=0):
 #
 # UNIX build:
 #
-def unixBuild(log):
+def unixBuild(log, args):
 
   print('')
   print('UNIX build starting...')
 
-  # Command to find number of processors (decode output to str then remove all whitespace):
-  numProcs = subprocess.Popen(["cat /proc/cpuinfo | grep processor | wc -l"], shell=True, stdout=subprocess.PIPE).communicate()[0].decode("utf-8")
-  numProcs = "".join(numProcs.split())
+  # Number of processors for parallel build:
+  numProcs = str(args.num_procs);
+
+  # Check numProcs, if 0 get number of processors from machine:
+  if numProcs == "0":
+    # Command to find number of processors (decode output to str then remove all whitespace):
+    numProcs = subprocess.Popen(["cat /proc/cpuinfo | grep processor | wc -l"], shell=True, stdout=subprocess.PIPE).communicate()[0].decode("utf-8")
+    numProcs = "".join(numProcs.split())
 
   # Execute build commands:
   sysCall(["make", "-j"+numProcs], log)
@@ -127,14 +132,19 @@ def unixBuild(log):
 #
 # Windows build:
 #
-def windowsBuild(log):
+def windowsBuild(log, args):
 
   print('')
   print('Windows build starting...')
 
-  # Command to find number of processors (decode output to str then remove all whitespace):
-  numProcs = subprocess.Popen(["echo %NUMBER_OF_PROCESSORS%"], shell=True, stdout=subprocess.PIPE).communicate()[0].decode("utf-8")
-  numProcs = "".join(numProcs.split())
+  # Number of processors for parallel build:
+  numProcs = str(args.num_procs)
+
+  # Check numProcs, if 0 get number of processors from machine:
+  if numProcs == "0":
+    # Command to find number of processors (decode output to str then remove all whitespace):
+    numProcs = subprocess.Popen(["echo %NUMBER_OF_PROCESSORS%"], shell=True, stdout=subprocess.PIPE).communicate()[0].decode("utf-8")
+    numProcs = "".join(numProcs.split())
 
   # Execute build commands:
   sysCall(["msbuild", "ALL_BUILD.vcxproj"], log)
@@ -167,6 +177,7 @@ if __name__ == "__main__":
   parser = argparse.ArgumentParser()
   parser.add_argument("-c", "--clean", help="Remove all build directories in current working directory matching 'local-build_*' and exit.", action="store_true")
   parser.add_argument("-i", "--install-prefix", help="Prefix for the install directory.", type=str, default="")
+  parser.add_argument("-j", "--num-procs", help="Number of processors for parallel builds (default: number of processors on machine)", type=int, default=0)
   parser.add_argument("-k", "--keep-build", help="Keep current build directory, do not remove after build completes.", action="store_true")
   parser.add_argument("-l", "--log-display", help="Display build log to stdout.", action="store_true")
   args = parser.parse_args()
@@ -247,9 +258,9 @@ if __name__ == "__main__":
 
   # Execute build based on platform from this point on:
   if localOS == 'Linux' or localOS == 'Darwin':
-    unixBuild(log)
+    unixBuild(log, args)
   elif localOS == 'Windows':
-    windowsBuild(log)
+    windowsBuild(log, args)
   else:
     print(Fore.RED + '**ERROR**: OS platform "' + localOS + '" not recognized; aborting!')
     completeScript(1)

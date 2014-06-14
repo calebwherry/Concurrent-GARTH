@@ -26,7 +26,7 @@ project(Concurrent-GARTH)
 #
 # Check compiler versions:
 #
-if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 
   # Check version. If empty, warn. If too old, error out:
   if ("${CMAKE_CXX_COMPILER_VERSION}" STREQUAL "")
@@ -36,12 +36,14 @@ if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   endif()
 
 	# Set compiler specific flags:
-	set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=c++11 -pthread")
+	set(CMAKE_CXX_FLAGS_DEBUG "-Wall -Wextra -ggdb -O2 -std=c++11 -pthread")
+  set(CMAKE_CXX_FLAGS_RELEASE "-O2 -std=c++11 -pthread")
 
   # Additional compiler flags depending on architecture:
   message( STATUS "System processor: ${CMAKE_SYSTEM_PROCESSOR}")
   if ("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "(.*)arm(.*)")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,--no-as-needed")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wl,--no-as-needed")
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wl,--no-as-needed")
   endif()
 
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
@@ -54,7 +56,8 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
   endif()
 
   # Set compiler specific flags:
-  set(CMAKE_CXX_FLAGS "-Wall -Wextra -ggdb -O2 -std=c++11 -stdlib=libc++ -pthread")
+  set(CMAKE_CXX_FLAGS_DEBUG "-Wall -Wextra -ggdb -O2 -std=c++11 -stdlib=libc++ -pthread")
+  set(CMAKE_CXX_FLAGS_RELEASE "-O2 -std=c++11 -stdlib=libc++ -pthread")
 
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 

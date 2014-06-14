@@ -63,7 +63,7 @@ def verifyNumProcessors(numProcs):
 
 	# If numProcs is anything but an int greater than 0, hard-code a value of 1:
 	#	NOTE: 
-	#		The try-catch is here in case the numProcs above returns something that
+	#		The try-catch is here in case the numProcs passed in is something that
 	#		is not castable to an int. The case I am specicially worried about is if
 	#		something like "4 processors found" is returned. Hopefully this won't 
 	#		happen but in the case that it does I catch and set the default.
@@ -145,7 +145,11 @@ def unixBuild(log, args):
   numProcs = verifyNumProcessors(numProcs)
 
   # Execute build commands:
-  sysCall(["make", "-j"+numProcs], log)
+  if args.build_targets != "":
+    sysCall(["make", "-j"+numProcs, args.build_targets], log)
+  else:
+    sysCall(["make", "-j"+numProcs], log)
+
   sysCall(["make", "-j"+numProcs, "test"], log)
   sysCall(["make", "-j"+numProcs, "doc"], log)
   sysCall(["make", "-j"+numProcs, "install"], log)
@@ -175,6 +179,8 @@ def windowsBuild(log, args):
   # Verify number of processors:
   numProcs = verifyNumProcessors(numProcs)
 
+  # TODO: Figure out how to deal with build targets on windows.
+
   # Execute build commands:
   sysCall(["msbuild", "ALL_BUILD.vcxproj"], log)
   sysCall(["msbuild", "RUN_TESTS.vcxproj"], log)
@@ -200,15 +206,18 @@ if __name__ == "__main__":
   from shutil import rmtree
   from glob import glob
 
+
   #
   # Argument parsing:
   #
   parser = argparse.ArgumentParser()
+  parser.add_argument("-b", "--build-targets", help="Specific target(s) to build.", type=str, default="")
   parser.add_argument("-c", "--clean", help="Remove all build directories in current working directory matching 'local-build_*' and exit.", action="store_true")
   parser.add_argument("-i", "--install-prefix", help="Prefix for the install directory.", type=str, default="")
   parser.add_argument("-j", "--num-procs", help="Number of processors for parallel builds (default: number of processors on machine)", type=int, default=0)
   parser.add_argument("-k", "--keep-build", help="Keep current build directory, do not remove after build completes.", action="store_true")
   parser.add_argument("-l", "--log-display", help="Display build log to stdout.", action="store_true")
+  parser.add_argument("-t", "--build-type", help="", choices=["DEBUG","RELEASE"], default="DEBUG")
   args = parser.parse_args()
 
 
@@ -283,7 +292,7 @@ if __name__ == "__main__":
   log = open(logFile, 'w');
 
   # On all platforms, we at least have to run cmake first to get build files:
-  sysCall(["cmake", scriptPath, "-DCMAKE_INSTALL_PREFIX='" + installDir + "'"], log, "")
+  sysCall(["cmake", scriptPath, "-DCMAKE_INSTALL_PREFIX='" + installDir + "'", "-DCMAKE_BUILD_TYPE=" + args.build_type], log, "")
 
   # Execute build based on platform from this point on:
   if localOS == 'Linux' or localOS == 'Darwin':

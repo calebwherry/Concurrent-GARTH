@@ -27,7 +27,7 @@ include_directories(
 #
 # Create a static library:
 #
-add_library(GarthLib STATIC Garth.cpp)
+add_library(GarthLib Garth.cpp)
 
 
 #

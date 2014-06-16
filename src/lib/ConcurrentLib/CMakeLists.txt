@@ -19,7 +19,7 @@
 #
 # Create a static library:
 #
-add_library(ConcurrentLib STATIC ConcurrentUtil.cpp ConcurrentObjects.cpp)
+add_library(ConcurrentLib ConcurrentUtil.cpp ConcurrentObjects.cpp)
 
 
 #

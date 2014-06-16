@@ -216,7 +216,8 @@ if __name__ == "__main__":
   parser.add_argument("-j", "--num-procs", help="Number of processors for parallel builds (default: number of processors on machine)", type=int, default=0)
   parser.add_argument("-k", "--keep-build", help="Keep current build directory, do not remove after build completes.", action="store_true")
   parser.add_argument("-l", "--log-display", help="Display build log to stdout.", action="store_true")
-  parser.add_argument("-t", "--build-type", help="", choices=["DEBUG","RELEASE"], default="DEBUG")
+  parser.add_argument("-s", "--static-libs", help="Build static instead of shared libraries.", action="store_true")
+  parser.add_argument("-t", "--build-type", help="", choices=["Debug","Release"], default="Debug")
   args = parser.parse_args()
 
 
@@ -237,7 +238,7 @@ if __name__ == "__main__":
 
 
   #
-  # Clean build directories if clean specified:
+  # Remove build directories if clean specified:
   #
   if args.clean:
     print("Removing all build directories matching 'build-*_*':")
@@ -276,12 +277,21 @@ if __name__ == "__main__":
   mkdir(buildRoot)
   mkdir(buildDir)
 
+  # Diplay build directory to screen:
+  print('Build location: ' + Fore.MAGENTA + buildRoot + "\n")
+
   # Create install directory if prefix was not supplied:
   if args.install_prefix == "":
     installDir = path.join(buildRoot, 'install-files')
     mkdir(installDir)
   else:
     installDir = path.join(args.install_prefix)
+
+  # Set library build type:
+  if args.static_libs:
+    sharedLibs = "OFF"
+  else:
+    sharedLibs = "ON"
 
   # Move into build directory:
   chdir(buildDir)
@@ -291,7 +301,12 @@ if __name__ == "__main__":
   log = open(logFile, 'w');
 
   # On all platforms, we at least have to run cmake first to get build files:
-  sysCall(["cmake", scriptPath, "-DCMAKE_INSTALL_PREFIX='" + installDir + "'", "-DCMAKE_BUILD_TYPE=" + args.build_type], log, "")
+  sysCall(
+    ["cmake", scriptPath, 
+     "-DCMAKE_INSTALL_PREFIX='" + installDir + "'", 
+     "-DCMAKE_BUILD_TYPE=" + args.build_type,
+     "-DBUILD_SHARED_LIBS=" + sharedLibs
+    ], log, "")
 
   # Execute build based on platform from this point on:
   if localOS == 'Linux' or localOS == 'Darwin':

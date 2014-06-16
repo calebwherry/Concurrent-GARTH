@@ -17,11 +17,29 @@
 
 
 #
-# CMake version and project name:
+# CMake version:
 #
 cmake_minimum_required(VERSION 2.6)
-project(Concurrent-GARTH)
 
+
+#
+# CMake overrides (have to go before project() or they are ignored):
+#
+if (NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE "Debug")
+endif()
+
+
+#
+# CMake project name:
+#
+project(Concurrent-GARTH CXX)
+
+
+#
+# Display build type:
+#
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 
 #
 # Check compiler versions:
@@ -40,7 +58,7 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   set(CMAKE_CXX_FLAGS_RELEASE "-O2 -std=c++11 -pthread")
 
   # Additional compiler flags depending on architecture:
-  message( STATUS "System processor: ${CMAKE_SYSTEM_PROCESSOR}")
+  message(STATUS "System processor: ${CMAKE_SYSTEM_PROCESSOR}")
   if ("${CMAKE_SYSTEM_PROCESSOR}" MATCHES "(.*)arm(.*)")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wl,--no-as-needed")
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wl,--no-as-needed")

@@ -20,11 +20,10 @@
 #
 # Global imports:
 #
-import subprocess
+import string, subprocess
 from time import time
 from colorama import init, Fore
 from sys import exit
-from string import whitespace
 
 
 #
@@ -241,8 +240,8 @@ if __name__ == "__main__":
   # Clean build directories if clean specified:
   #
   if args.clean:
-    print("Removing all build directories matching 'local-build_*':")
-    buildDirs = glob('local-build_*')
+    print("Removing all build directories matching 'build-*_*':")
+    buildDirs = glob('build-*_*')
     buildDirs = filter(path.isdir, buildDirs)
     for dir in buildDirs:
       print(Fore.RED + "\t" + dir)
@@ -272,14 +271,14 @@ if __name__ == "__main__":
   localOS = system()
 
   # Create build directories:
-  buildRoot = path.join(currentPath, 'local-build_' + timeStamp)
-  buildDir = path.join(buildRoot, 'build_files')
+  buildRoot = path.join(currentPath, 'build-'+args.build_type.lower()+'_' + timeStamp)
+  buildDir = path.join(buildRoot, 'build-files')
   mkdir(buildRoot)
   mkdir(buildDir)
 
   # Create install directory if prefix was not supplied:
   if args.install_prefix == "":
-    installDir = path.join(buildRoot, 'install_files')
+    installDir = path.join(buildRoot, 'install-files')
     mkdir(installDir)
   else:
     installDir = path.join(args.install_prefix)

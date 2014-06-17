@@ -144,11 +144,7 @@ def unixBuild(log, args):
   numProcs = verifyNumProcessors(numProcs)
 
   # Execute build commands:
-  if args.build_targets != "":
-    sysCall(["make", "-j"+numProcs, args.build_targets], log)
-  else:
-    sysCall(["make", "-j"+numProcs], log)
-
+  sysCall(["make", "-j"+numProcs], log)
   sysCall(["make", "-j"+numProcs, "test"], log)
   sysCall(["make", "-j"+numProcs, "doc"], log)
   sysCall(["make", "-j"+numProcs, "install"], log)
@@ -210,14 +206,13 @@ if __name__ == "__main__":
   # Argument parsing:
   #
   parser = argparse.ArgumentParser()
-  parser.add_argument("-b", "--build-targets", help="Specific target(s) to build.", type=str, default="")
+  parser.add_argument("-b", "--build-type", help="Build type (default: Debug).", choices=["Debug","Release"], default="Debug")
   parser.add_argument("-c", "--clean", help="Remove all build directories in current working directory matching 'local-build_*' and exit.", action="store_true")
   parser.add_argument("-i", "--install-prefix", help="Prefix for the install directory.", type=str, default="")
   parser.add_argument("-j", "--num-procs", help="Number of processors for parallel builds (default: number of processors on machine)", type=int, default=0)
   parser.add_argument("-k", "--keep-build", help="Keep current build directory, do not remove after build completes.", action="store_true")
   parser.add_argument("-l", "--log-display", help="Display build log to stdout.", action="store_true")
   parser.add_argument("-s", "--static-libs", help="Build static instead of shared libraries.", action="store_true")
-  parser.add_argument("-t", "--build-type", help="", choices=["Debug","Release"], default="Debug")
   args = parser.parse_args()
 
 

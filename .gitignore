@@ -17,6 +17,7 @@
 
 # Build directories
 bin/
+build*/
 
 # Mac files
 .DS_STORE
